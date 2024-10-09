@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Connect the Dots!</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="navbar-dropdown.js"></script>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a href="main.html">Home</a>
+      <a href="login_page.html">Login</a>
+      <div class="dropdown">
+          <button class="dropbtn" onclick="getDropdown()">Activities</button>
+          <div class="dropdown-content" id="myDropdown">
+              <a href="connectTheDots_page.html">Connect The Dots</a>
+              <a href="popTheBubble_page.html">Pop The Bubble</a>
+              <a href="jigsawPuzzle_page.html">Jigsaw Puzzle</a>
+          </div>
+      </div>
+    </div>
+    <h1>CONNECT THE DOTS! :D<h1>
+    <h2>DIRECTIONS:<h2>
+      <h3>Connect the dots with your mouse to the corresponding number! If you connect the line to the correct number, a star will pop up on the screen.   
+        <h3>
+    <script src="connectTheDots.js"></script>
+  </body>
+</html>
