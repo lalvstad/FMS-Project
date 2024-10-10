@@ -7,13 +7,15 @@
     <title>Jigsaw Puzzle</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Silkscreen' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="navbar-dropdown.js"></script>
   </head>
 
-  <body>
+  <body class="puzzleBG">
     <div class="topnav">
       <a href="main.html">Home</a>
       <a href="login_page.html">Login</a>
@@ -26,9 +28,18 @@
           </div>
       </div>
     </div>
-    <h1>JIGSAW PUZZLE! :D<h1>
-    <h2>DIRECTIONS:<h2>
-    <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects, but the screen flashes red. Good luck solving :D<h3>
+
+    <div class="puzzleTitle">
+      <h1>Jigsaw Puzzle!</h1>
+    </div>
+  <div class="puzzleDirections">
+      <div class="textBoxPuzzle">
+        <h2>DIRECTIONS:<h2>
+        <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects, but the screen flashes red. Good luck solving!
+          <h3>
+      </div>
+  </div>
+
     <script src="jigsawPuzzle.js"></script>
   </body>
 </html>

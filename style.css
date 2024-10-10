@@ -9,15 +9,15 @@ canvas {
 
 /* .topnav is the main navigation bar division */
 .topnav {
-  background-color: #000000;
+  background-color: #ffd1d3;
   overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Kanit';
 }
 
 /* Styles the links of the navigation bar */
 .topnav a {
   float: left;
-  color: white;
+  color: #416055;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -39,7 +39,7 @@ canvas {
   font-size: 16px;
   border: none;
   outline: none;
-  color: white;
+  color: #416055;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
@@ -48,7 +48,7 @@ canvas {
 
 /* When the nav bar, dropdown, dropdown button are hovered or focused on */
 .topnav a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-  background-color: darkgreen;
+  background-color: #f4eaff;
 }
 
 /* Styles the dropdown buttons */
@@ -85,30 +85,165 @@ canvas {
   
 }
 
+/* Pop The Bubble Stylization */
+.popBubblesBG {
+  background-color: #d5bcf0;
+}
+
 .directions {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.bubbleTitle h1 {
+  color: #655777;
+  background-color: white;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 4.5rem; 
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+.directions h2 {
+  color: black;
+  font-size: 4rem;
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+.directions h3 {
+  color: #655777;
+  font-size: 2.75rem;
+  font-family: 'Silkscreen';
+  text-align: center;
   
 }
 
-h1{
-  color: black;
-  font-size: 24;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+.textBox {
+  border: 1px solid black;
+  padding: 15px;
+  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+  background-color: #f4eaff;
+}
 
+.textBox :first-child {
+  padding: 5px 0;
+  padding-left: 15px;
+  width: calc(100% + 15px);
+  margin: -15px -15px 0 -15px;
+  background-color: rgb(234, 215, 255);
+  color: #655777;
+}
+ 
+/* Connect The Dots Stylization */
+.connectTheDotsBG {
+  background-color: #a2c4c9;
+}
+
+.dotsDirections {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.dotsTitle h1 {
+  color: #465658;
+  background-color: white;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 4.5rem; 
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+
+.dotsDirections h2 {
+  color: black;
+  font-size: 4rem;
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+.dotsDirections h3 {
+  color: #465658;
+  font-size: 2.75rem;
+  font-family: 'Silkscreen';
+  text-align: center;
   
 }
 
-h2{
+.textBoxDots {
+  border: 1px solid black;
+  padding: 15px;
+  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+  background-color: #e0f1f3;
+}
+
+.textBoxDots :first-child {
+  padding: 5px 0;
+  padding-left: 15px;
+  width: calc(100% + 15px);
+  margin: -15px -15px 0 -15px;
+  background-color: #bee6ec;
+  color: #465658;
+}
+
+/* Jigsaw Puzzle Stylization */
+.puzzleBG {
+  background-color: #ffc760;
+}
+
+.puzzleDirections {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.puzzleTitle h1 {
+  color: #9c6b10;
+  background-color: white;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 4.5rem; 
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+.puzzleDirections h2 {
   color: black;
-  font-size: 16;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 4rem;
+  font-family: 'Silkscreen';
+  text-align: center;
+}
+
+.puzzleDirections h3 {
+  color: #9c6b10;
+  font-size: 2.75rem;
+  font-family: 'Silkscreen';
   text-align: center;
   
 }
 
-h3{
-  color: black;
-  font-size: 15;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+.textBoxPuzzle {
+  border: 1px solid black;
+  padding: 15px;
+  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+  background-color: #fff6e4;
+}
+
+.textBoxPuzzle :first-child {
+  padding: 5px 0;
+  padding-left: 15px;
+  width: calc(100% + 15px);
+  margin: -15px -15px 0 -15px;
+  background-color: #ffd484;
+  color: #9c6b10;
 }
