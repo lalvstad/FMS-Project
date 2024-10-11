@@ -13,6 +13,13 @@
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="navbar-dropdown.js"></script>
+    <script>
+      function startGame() {
+        document.getElementById("instructions").remove();
+        let activity = document.getElementById("activity");
+        activity.style.display = "block";
+      }
+    </script>
   </head>
 
   <body class="popBubblesBG">
@@ -28,6 +35,7 @@
           </div>
       </div>
     </div>
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
     <div class="bubbleTitle">
       <h1>POP THE BUBBLES!</h1>
     </div>
@@ -37,8 +45,8 @@
         <h3>As the bubbles float across your screen, press the letter on the bubble to pop it! 
             The speed will increase as the time goes on, how high of a score you can get?<h3>
       </div>
-  </div>
-
+    </div>
     <script src="popTheBubble.js"></script>
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>

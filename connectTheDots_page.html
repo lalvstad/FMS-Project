@@ -13,6 +13,13 @@
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="navbar-dropdown.js"></script>
+    <script>
+      function startGame() {
+        document.getElementById("instructions").remove();
+        let activity = document.getElementById("activity");
+        activity.style.display = "block";
+      }
+    </script>
   </head>
 
   <body class="connectTheDotsBG">
@@ -28,16 +35,20 @@
           </div>
       </div>
     </div>
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
     <div class="dotsTitle">
       <h1>CONNECT THE DOTS!</h1>
     </div>
-  <div class="dotsDirections">
+    <div class="dotsDirections" id="instructions">
       <div class="textBoxDots">
         <h2>DIRECTIONS:<h2>
         <h3>Connect the dots with your mouse to the corresponding number! If you connect the line to the correct number, a star will pop up on the screen.<h3>
+        <button class="startButton" onclick="startGame()">Start</button>
       </div>
-  </div>
-
-    <script src="connectTheDots.js"></script>
+    </div>
+    <div id="activity">
+      <script src="connectTheDots.js"></script>
+    </div>
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>

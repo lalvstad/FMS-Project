@@ -5,6 +5,14 @@ html, body {
 
 canvas {
   display: block;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+/* For displaying activity after startGame() is called */
+#activities {
+  display: none;
 }
 
 /* .topnav is the main navigation bar division */
@@ -83,6 +91,44 @@ canvas {
 
 .login_form {
   
+}
+
+/* Home Page Stylization */
+/* .homePage {} */
+
+.logoContainer {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+  
+}
+
+ .welcomeText {
+  text-align: center;
+  font-family: 'Kanit';
+  color: rgb(97, 168, 153);
+  font-size: 3rem;
+  margin-top: 20px;
+  margin-bottom: -40px;
+
+}
+
+.topBanner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bottomBanner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Pop The Bubble Stylization */
@@ -194,6 +240,18 @@ canvas {
   color: #465658;
 }
 
+/* Formats the start button for activites */
+.textBoxDots .startButton {
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  width: 20%;
+  background-color: darkgreen;
+}
+
 /* Jigsaw Puzzle Stylization */
 .puzzleBG {
   background-color: #ffc760;
@@ -230,6 +288,52 @@ canvas {
   
 }
 
+/* Login Page Stylization */
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  display: inline-block;
+  border: 3px solid #416055ff;
+  box-sizing: border-box;
+  font-family: 'Silkscreen';
+  font-size: 20px;
+}
+
+.forgot button {
+  background-color: #416055ff;
+  color: #bee8daff;
+  padding: 14px 20px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  font-family: 'Kanit';
+  font-size: 20px;
+}
+
+ .container3 {
+  text-align: center;
+  font-family: 'Kanit';
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  text-align: center;
+  font-family: 'Kanit';
+}
+
+.forgot {
+  text-align: center;
+  font-family: 'Silkscreen';
+  font-size: 25px;
+  padding: 25px;
+}
+
 .textBoxPuzzle {
   border: 1px solid black;
   padding: 15px;
@@ -247,3 +351,4 @@ canvas {
   background-color: #ffd484;
   color: #9c6b10;
 }
+
