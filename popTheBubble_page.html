@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pop The Bubble</title>
+    <title>Pop The Bubble!</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Silkscreen' rel='stylesheet'>
@@ -15,8 +15,9 @@
     <script src="navbar-dropdown.js"></script>
     <script>
       function startGame() {
-        document.getElementById("instructions").remove();
-        let activity = document.getElementById("activity");
+        document.getElementById("BubbleInstructions").remove();
+        document.getElementById("bottomFlowerBanner").remove();
+        let activity = document.getElementById("BubbleActivity-container");
         activity.style.display = "block";
       }
     </script>
@@ -39,14 +40,28 @@
     <div class="bubbleTitle">
       <h1>POP THE BUBBLES!</h1>
     </div>
-  <div class="directions">
+  <div class="directions" id="BubbleInstructions">
       <div class="textBox">
         <h2>DIRECTIONS:<h2>
         <h3>As the bubbles float across your screen, press the letter on the bubble to pop it! 
             The speed will increase as the time goes on, how high of a score you can get?<h3>
+        <button class="startButton" onclick="startGame()">Start</button>
       </div>
     </div>
+    <div id="BubbleActivity-container">
+      <script src="popTheBubble.js", style="display: none;"></script>
+    </div>
     <script src="popTheBubble.js"></script>
-    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+
+    <iframe
+    id="BubbleActivity-container"
+    src = "popBubbleLoader.html"
+    name = "targetframe"
+    allowTransparency="true"
+    scrolling = "no"
+    frameboarder="0">
+    </iframe>
+
+    <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>

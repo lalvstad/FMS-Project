@@ -15,8 +15,9 @@
     <script src="navbar-dropdown.js"></script>
     <script>
       function startGame() {
-        document.getElementById("instructions").remove();
-        let activity = document.getElementById("activity");
+        document.getElementById("puzzleInstructions").remove();
+        document.getElementById("bottomFlowerBanner").remove();
+        let activity = document.getElementById("PuzzleActivity-container");
         activity.style.display = "block";
       }
     </script>
@@ -40,15 +41,29 @@
     <div class="puzzleTitle">
       <h1>Jigsaw Puzzle!</h1>
     </div>
-  <div class="puzzleDirections">
+  <div class="puzzleDirections" id="puzzleInstructions">
       <div class="textBoxPuzzle">
         <h2>DIRECTIONS:<h2>
-        <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects, but the screen flashes red. Good luck solving!
-          <h3>
+        <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects, but the screen flashes red. Good luck solving!</h3>
+        <button class="startButton" onclick="startGame()">Start</button>
       </div>
   </div>
 
-    <script src="jigsawPuzzle.js"></script>
-    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
-  </body>
+  <div id="PuzzleActivity-container">
+    <script src="jigsawPuzzle.js", style="display: none;"></script>
+  </div>
+
+  <script src="jigsawPuzzle.js"></script>
+
+  <iframe
+  id="PuzzleActivity-container"
+  src = "jigsawLoader.html"
+  name = "targetframe"
+  allowTransparency="true"
+  scrolling = "no"
+  frameboarder="0">
+  </iframe>
+
+  <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+</body>
 </html>

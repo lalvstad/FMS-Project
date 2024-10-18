@@ -15,9 +15,10 @@
     <script src="navbar-dropdown.js"></script>
     <script>
       function startGame() {
-        document.getElementById("instructions").remove();
-        let activity = document.getElementById("activity");
-        activity.style.display = "block";
+        document.getElementById("instructions").remove(); // Removes the instructions information at the start
+        document.getElementById("bottomFlowerBanner").remove();
+        let activity = document.getElementById("activity-container")
+        activity.style.display = 'block'; // Activates the display
       }
     </script>
   </head>
@@ -27,7 +28,7 @@
       <a href="main.html">Home</a>
       <a href="login_page.html">Login</a>
       <div class="dropdown">
-          <button class="dropbtn" onclick="getDropdown()">Activities</button>
+          <button class="dropbtn" onclick="getDropdown()">Activities</button> <!-- src: navbar-dropdown.js-->
           <div class="dropdown-content" id="myDropdown">
               <a href="connectTheDots_page.html">Connect The Dots</a>
               <a href="popTheBubble_page.html">Pop The Bubble</a>
@@ -43,12 +44,17 @@
       <div class="textBoxDots">
         <h2>DIRECTIONS:<h2>
         <h3>Connect the dots with your mouse to the corresponding number! If you connect the line to the correct number, a star will pop up on the screen.<h3>
-        <button class="startButton" onclick="startGame()">Start</button>
+        <button class="startButton" onclick="startGame()">Start</button> <!-- src: this file -->
       </div>
     </div>
-    <div id="activity">
-      <script src="connectTheDots.js"></script>
-    </div>
-    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+    <iframe
+      id="activity-container"
+      src = "connectDotsLoader.html"
+      name = "targetframe"
+      allowTransparency="true"
+      scrolling = "no"
+      frameboarder="0">
+    </iframe>
+    <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>

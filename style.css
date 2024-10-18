@@ -10,11 +10,6 @@ canvas {
   padding: 10px;
 }
 
-/* For displaying activity after startGame() is called */
-#activities {
-  display: none;
-}
-
 /* .topnav is the main navigation bar division */
 .topnav {
   background-color: #ffd1d3;
@@ -89,9 +84,9 @@ canvas {
   display: block;
 }
 
-.login_form {
+/* .login_form {
   
-}
+} */ 
 
 /* Home Page Stylization */
 /* .homePage {} */
@@ -144,9 +139,10 @@ canvas {
 .bubbleTitle h1 {
   color: #655777;
   background-color: white;
+  line-height: 3.4rem;
   margin: 0 auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
   font-size: 4.5rem; 
   font-family: 'Silkscreen';
   text-align: center;
@@ -191,16 +187,17 @@ canvas {
 }
 
 .dotsDirections {
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
 }
 
 .dotsTitle h1 {
   color: #465658;
   background-color: white;
+  line-height: 3.4rem;
   margin: 0 auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
   font-size: 4.5rem; 
   font-family: 'Silkscreen';
   text-align: center;
@@ -227,7 +224,7 @@ canvas {
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 100vh;
+  height: 90vh; /* */
   background-color: #e0f1f3;
 }
 
@@ -243,13 +240,45 @@ canvas {
 /* Formats the start button for activites */
 .textBoxDots .startButton {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 32px;
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+  padding: 10px 18px;
   width: 20%;
-  background-color: darkgreen;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #465658;
+}
+
+.textBoxPuzzle .startButton {
+  cursor: pointer;
+  font-size: 32px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 18px;
+  display: flex;
+  margin: 0 auto;
+  width: 20%;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #9c6b10;
+}
+
+.textBox .startButton {
+  cursor: pointer;
+  font-size: 32px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 18px;
+  display : flex;
+  margin : 0 auto;
+  width: 20%;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #655777;
 }
 
 /* Jigsaw Puzzle Stylization */
@@ -265,9 +294,10 @@ canvas {
 .puzzleTitle h1 {
   color: #9c6b10;
   background-color: white;
+  line-height: 3.4rem;
   margin: 0 auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
   font-size: 4.5rem; 
   font-family: 'Silkscreen';
   text-align: center;
@@ -351,4 +381,28 @@ button:hover {
   background-color: #ffd484;
   color: #9c6b10;
 }
+
+iframe {
+  display: none;
+  width: 99.7%;
+  overflow: hidden;
+  height: 515px;
+}
+
+/* For displaying activity after startGame() is called; Is the ID of iframe */
+#activity-container {
+  overflow: hidden;
+  display: none;
+}
+
+#PuzzleActivity-container {
+  overflow: hidden;
+  display: none;
+}
+
+#BubbleActivity-container {
+  overflow: hidden;
+  display: none;
+}
+
 
