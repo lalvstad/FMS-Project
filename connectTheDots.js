@@ -66,7 +66,7 @@ function draw() {
   
   let previousKey = 0;
   for (let key in selectedMap) {
-    let currKey = Integer.parse(key.substring(4)); -- Idek if Integer.parse is a thing in JavaScript, but it is in Java
+    let currKey = parseInt(key.substring(4), 10); // parseInt(keyNumber, base-10)
     if (previousKey === currKey-1 || previousKey === 0) {
       stroke('green');
     } 
