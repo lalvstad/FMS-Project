@@ -5,8 +5,36 @@ let points = [
   [850, 460], [880, 460], [880, 260], [890, 260], [890, 250],
   [880, 250], [850, 200], [700, 120]
 ];
+/* HashMap Test 
+Arrays are traversed using an index
+HashMaps are traveresed using a key associated with the value you want;
+This will make accessing a point a time complexity of O(1) instead of O(n). 
+*/
+/*
+let pointsMap = {};
+let keyIterator = 1;
+let keyName = "point" + keyIterator;
+points.forEach(element => {
+  pointsMap[keyName] = element;
+  keyIterator++;
+  keyName = "point" + keyIterator;
+})
+
+for (let key in pointsMap) {
+  console.log('Element ${key} is at ${pointsMap[key]}');
+  if (keyIterator === points.length) {
+    console.log('All points stored successfully in HashMap');
+  }
+  else {
+    console.log('MEMORY ERROR: Memory was lost inserting Array[points] into HashMap[pointsMap]');
+  }
+}
+*/
 
 let selectedPoints = [];
+/* if we want selectedPoints HashMap as well
+let selectedPoints = {};
+*/
 
 function setup() { 
   createCanvas(1200, 515);
@@ -30,15 +58,47 @@ function draw() {
   for (let sp of selectedPoints) {
       vertex(sp[0], sp[1]); // Connect the selected points
   }
+  /*
+  We need to add an if statement that determines if the selected point is the next point in order after the previous,
+  and change the line color accordingly
+  We will need to substring the key to obtain the number, and compare
+  This would be the implementation with a HashMap. NOT TESTED OR DEBUGGED
+  
+  let previousKey = 0;
+  for (let key in selectedMap) {
+    let currKey = parseInt(key.substring(4), 10); // parseInt(keyNumber, base-10)
+    if (previousKey === currKey-1 || previousKey === 0) {
+      stroke('green');
+    } 
+    else {
+      stroke('red');
+    }
+    let point = selectedMap[key];
+    vertex(point[0], point[1]);
+    previousKey = currKey;
+  }
+  */
   endShape();
 }
+
 
 function mousePressed() {
   for (let point of points) {
       if (dist(mouseX, mouseY, point[0], point[1]) < 10) {
-          selectedPoints.push(point); // Add the clicked point to selected points
+          selectedPoints.push(point);
       }
   }
 }
+
+/* HashMap version of mousePressed()
+  function mousePressed() {
+    for (let key in pointsMap) {
+      let selected = pointsMap[key];
+      if (dist(mouseX, mouseY, selected[0], selected[1]) < 10) {
+        selectedMap[key] = selected;
+      }
+    }
+  }
+*/
 
   
