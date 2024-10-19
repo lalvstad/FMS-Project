@@ -83,10 +83,9 @@ function draw() {
 
 
 function mousePressed() {
-  for (let point of points) { // let key in pointsMap
-      // let selected = pointsMap[key]
-      if (dist(mouseX, mouseY, point[0], point[1]) < 10) { // selected[0], selected[1]
-          selectedPoints.push(point); // Add the clicked point to selected points; selectedMap[key] = selected;
+  for (let point of points) {
+      if (dist(mouseX, mouseY, point[0], point[1]) < 10) {
+          selectedPoints.push(point);
       }
   }
 }
