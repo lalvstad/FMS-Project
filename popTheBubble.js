@@ -71,7 +71,6 @@ function createDots() {
     dotMap.remove(dotNameGet);
   }
 
-  let 
   /*
   *** Number of bubbles on screen is limited to 25 to prevent duplicates of letters on screen ***
    Solution works fine for now, if we wanted to allow duplicates, we would need to put multiple dot locations into a 'Set' data structure as the
