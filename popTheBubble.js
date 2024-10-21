@@ -8,8 +8,14 @@ This might be cool to have levels.
 /* 
 How bubbles get destroyed:
 -   User inputs letter associated with the bubble
-    1:  Locate key in dotMap,
--   The bubble leaves the screen dimensions on the left side.
+      1:  Locate key in dotMap
+      2:  Move ellipse off screen 
+      3:  Delete key/value association in dotMap 
+      4:  Add +1 to correct counter
+      5:  Play a positive noise
+-   The bubble leaves the screen dimensions on the left side
+      1:  If dotX is less than or equal to 0, delete key/value association in dotMap 
+      2:  Create red flash on screen
 */
 
 
@@ -45,7 +51,7 @@ let dotMap = {}
 // Creates a dot somewhere within the canvas and adds its position to a HashMap containing dot locations.
 function createDots() {
   const dotNameSelection = 'abcdefghijklmnopqrstuvwxyz' // possible keys available
-  let dotRadius = 30;
+  const dotRadius = 30;
   let letter = Math.floor(Math.random() * (24)); // getting a letter position at random between 0 and 25 (inclusive)
   let dotNameGet = dotNameSelection.substring(letter, letter + 1); // fetching the letter from the string.
   
@@ -66,20 +72,29 @@ function createDots() {
     // Need to create text that follows the bubble
   }
 
-  dot[0] = dot[0] - speed;
-  if (dot[0] <= 0) {
-    dotMap.remove(dotNameGet);
-  }
-
   /*
   *** Number of bubbles on screen is limited to 25 to prevent duplicates of letters on screen ***
    Solution works fine for now, if we wanted to allow duplicates, we would need to put multiple dot locations into a 'Set' data structure as the
    value for the associated key (letter). I didn't want to do the work of implementing how we would create these sets and how data would be accessed rn.
   */
 
-   // Will implement movement on Tuesday.
+  /* Will implement movement on Tuesday. There is actually no way to remove shapes after they have been drawn, 
+     so moving them off the viewable canvas will suffice. */
+  // Maybe oscilates back and forth on y-axis??
+  while (dot[0] > 0) {
+    dot[0] = dot[0] - speed;
+  }
+  if (dot[0] <= 0) {
+    dotMap.remove(dotNameGet);
+  }
+}
 
-  
+function levelStart(levelNumber) {
+  levelSetting(levelNumber);
+  for (let i = 0; i < number_of_bubbles; i++) {
+    createDots();
+    await(4000/speed + 500); // configures the amount of time between the creation of dots
+  }
 }
 
 
