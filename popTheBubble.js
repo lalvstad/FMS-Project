@@ -92,8 +92,7 @@ function createDots() {
 function levelStart(levelNumber) {
   levelSetting(levelNumber);
   for (let i = 0; i < number_of_bubbles; i++) {
-    createDots();
-    await(4000/speed + 500); // configures the amount of time between the creation of dots
+    setInterval(createDots(), 4000/speed + 500); // configures the amount of time between the creation of dots
   }
 }
 
