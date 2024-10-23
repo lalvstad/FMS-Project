@@ -150,14 +150,15 @@ canvas {
 
 .directions h2 {
   color: black;
-  font-size: 4rem;
+  font-size: 7vh;
   font-family: 'Silkscreen';
   text-align: center;
+  
 }
 
 .directions h3 {
   color: #655777;
-  font-size: 2.75rem;
+  font-size: 5vh;
   font-family: 'Silkscreen';
   text-align: center;
   
@@ -207,14 +208,14 @@ canvas {
 
 .dotsDirections h2 {
   color: black;
-  font-size: 4rem;
+  font-size: 7vh;
   font-family: 'Silkscreen';
   text-align: center;
 }
 
 .dotsDirections h3 {
   color: #465658;
-  font-size: 2.75rem;
+  font-size: 5vh;
   font-family: 'Silkscreen';
   text-align: center;
   
@@ -266,14 +267,14 @@ canvas {
 
 .puzzleDirections h2 {
   color: black;
-  font-size: 4rem;
+  font-size: 7vh;
   font-family: 'Silkscreen';
   text-align: center;
 }
 
 .puzzleDirections h3 {
   color: #9c6b10;
-  font-size: 2.75rem;
+  font-size: 5vh;
   font-family: 'Silkscreen';
   text-align: center;
   
