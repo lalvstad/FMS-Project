@@ -229,7 +229,7 @@ canvas {
   width: 50%;
   height: 90vh; /* */
   background-color: #e0f1f3;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .textBoxDots :first-child {
