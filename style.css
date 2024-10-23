@@ -170,6 +170,7 @@ canvas {
   width: 50%;
   height: 100vh;
   background-color: #f4eaff;
+  overflow: auto;
 }
 
 .textBox :first-child {
@@ -220,67 +221,25 @@ canvas {
 }
 
 .textBoxDots {
+  
   border: 1px solid black;
   padding: 15px;
   margin: 0 auto;
   width: 50%;
   height: 90vh; /* */
   background-color: #e0f1f3;
+  overflow: auto;
 }
 
 .textBoxDots :first-child {
+  display: flex;
+  justify-content: center;
   padding: 5px 0;
   padding-left: 15px;
   width: calc(100% + 15px);
   margin: -15px -15px 0 -15px;
   background-color: #bee6ec;
   color: #465658;
-}
-
-/* Formats the start button for activites */
-.textBoxDots .startButton {
-  cursor: pointer;
-  font-size: 32px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 10px 18px;
-  display: block;
-  margin: 0 auto;
-  width: 20%;
-  font-family: 'Silkscreen';
-  text-align : center;
-  background-color: #465658;
-}
-
-.textBoxPuzzle .startButton {
-  cursor: pointer;
-  font-size: 32px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 10px 18px;
-  display: block;
-  margin: 0 auto;
-  width: 20%;
-  font-family: 'Silkscreen';
-  text-align : center;
-  background-color: #9c6b10;
-}
-
-.textBox .startButton {
-  cursor: pointer;
-  font-size: 32px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 10px 18px;
-  display : block;
-  margin : 0 auto;
-  width: 20%;
-  font-family: 'Silkscreen';
-  text-align : center;
-  background-color: #655777;
 }
 
 /* Jigsaw Puzzle Stylization */
@@ -319,6 +278,77 @@ canvas {
   text-align: center;
   
 }
+
+.textBoxPuzzle {
+  border: 1px solid black;
+  padding: 15px;
+  margin: 0 auto;
+  width: 50%;
+  height: 100vh;
+  background-color: #fff6e4;
+  overflow: auto;
+}
+
+.textBoxPuzzle :first-child {
+  padding: 5px 0;
+  padding-left: 15px;
+  width: calc(100% + 15px);
+  margin: -15px -15px 0 -15px;
+  background-color: #ffd484;
+  color: #9c6b10;
+}
+
+/* Formats the start button for activites */
+.textBoxDots .startButton {
+  
+  cursor: pointer;
+  font-size: 4vh;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 18px;
+  display: block;
+  margin: 0 auto;
+  min-width: 200px;
+  width: 20%;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #465658;
+}
+
+.textBoxPuzzle .startButton {
+  cursor: pointer;
+  font-size: 4vh;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 18px;
+  display: block;
+  margin: 0 auto;
+  min-width: 200px;
+  width: 20%;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #9c6b10;
+}
+
+.textBox .startButton {
+  cursor: pointer;
+  font-size: 4vh;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px 18px;
+  display : block;
+  margin : 0 auto;
+  min-width: 200px;
+  width: 20%;
+  font-family: 'Silkscreen';
+  text-align : center;
+  background-color: #655777;
+}
+
+
 
 /* Login Page Stylization */
 input[type=text], input[type=password] {
@@ -366,23 +396,6 @@ button:hover {
   padding: 25px;
 }
 
-.textBoxPuzzle {
-  border: 1px solid black;
-  padding: 15px;
-  margin: 0 auto;
-  width: 50%;
-  height: 100vh;
-  background-color: #fff6e4;
-}
-
-.textBoxPuzzle :first-child {
-  padding: 5px 0;
-  padding-left: 15px;
-  width: calc(100% + 15px);
-  margin: -15px -15px 0 -15px;
-  background-color: #ffd484;
-  color: #9c6b10;
-}
 
 iframe {
   display: none;
