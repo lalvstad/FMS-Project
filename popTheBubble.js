@@ -1,11 +1,4 @@
 /* 
-This might be cool to have levels. 
--   First level, bubble just appears on screen. 
--   Second level, bubbles appear from the right side of the screen moving toward the left oscilating up and down. 
--   As levels go on, more and more bubbles appear
-*/
-
-/* 
 How bubbles get destroyed:
 -   User inputs letter associated with the bubble
       1:  Locate key in dotMap
@@ -21,7 +14,9 @@ How bubbles get destroyed:
 
 let number_of_bubbles = 0;
 let speed = 0; // will need to see how fast it moves
+let bubblesPopped = 0;
 
+// leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
 function levelSetting(levelNumber) {
   switch(levelNumber) {
     case 1: 
@@ -56,9 +51,14 @@ function createDots() {
   let dotNameGet = dotNameSelection.substring(letter, letter + 1); // fetching the letter from the string.
   
   // Prevents duplicate of the same letter
-  while (dotMap.containsKey(dotNameGet)) { 
+  let preventOverFlow = 0;
+  while (dotMap.has(dotNameGet)) { 
     letter = Math.floor(Math.random() * (24));
     dotNameGet = dotNameSelection.substring(letter, letter + 1);
+    preventOverFlow++;
+    if (preventOverFlow == 25) {
+      return false;
+    }
   }
   
   // Prevents infinite while loop @ ln 59
@@ -98,7 +98,8 @@ function dotUpdate()  {
   const dotRadius = 30;
   for (let [key, value] of dotMap) {
     if (value[0] > 0) {
-      value[0] = value[0] - speed;
+      text(key, value[0], value[1]);
+      value[0] -= speed;
       ellipse(value[0], value[1], dotRadius, dotRadius);
     }
     if (value[0] <= 0) {
@@ -109,10 +110,18 @@ function dotUpdate()  {
 
 // Need to implement an EventListener waiting for the key-press of one of the keys in dotMap
 
+node.addEventListener('keydown', function(event) {
+  const keyPressed = event.key;
+  if (dotMap.has(keyPressed)) {
+    bubblesPopped += 1;
+    dotMap.remove(keyPressed);
+  }
+})
 
 function draw() {
   background(220);
   background('white');
+  text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
 
   dotUpdate();
 }
