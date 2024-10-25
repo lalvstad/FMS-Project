@@ -34,46 +34,81 @@ for (let [key, value] of pointsMap) {
 */
 
 let selectedPoints = [];
+let elapsedTime = 0;
+let activated = true;
 /* if we want selectedPoints HashMap as well
 const selectedPoints = new Map();
 */
 
 function setup() { 
   createCanvas(1200, 515);
-  background('red'); // Use a valid color string
+  startStopwatch();
+  let resetButton = createButton('Reset');
+  resetButton.position(1200, 0);
+  resetButton.mousePressed(resetPoints);
 }
 
-function draw() {
-  background('#DDA0DD'); // Use a valid color
-
-  // Draw points
-  fill('red');
+// 
+function drawPoints() {
+  fill('black');
+  
   for (let i = 0; i < points.length; i++) {
     let point = points[i];
     ellipse(point[0], point[1], 10, 10); // Draw red circles
 
-    fill('black');
     textSize(12);
     text(i + 1, point[0] + 6, point[1] + 4); // Offset the text slightly
   }
+}
+
+function resetPoints() {
+  clear();
+  selectedPoints = []; 
+  resetStopwatch();
+  activated = true;
+}
+
+function draw() {
+  // Draw points
+  drawPoints();
+
+  // Creates reset button
+  let resetButton = createButton('Reset');
+  resetButton.position(1200, 0);
+
+  // Calls drawPoints() when button pressed
+  resetButton.mousePressed(resetPoints);
 
   // Draw lines between selected points
   strokeWeight(2);
   for (let i = 0; i < selectedPoints.length - 1; i++) {
     let currentPoint = selectedPoints[i];
-    let nextPoint = selectedPoints[i + 1];
+    let nextPoint = selectedPoints[(i + 1) % selectedPoints.length];
     let currentIndex = points.indexOf(currentPoint);
     let nextIndex = points.indexOf(nextPoint);
 
-    if (Math.abs(currentIndex - nextIndex) === 1) {
+      if (Math.abs(currentIndex - nextIndex) === 1 || (currentIndex = selectedPoints.length - 1 && nextIndex == 0)) {
       stroke('green'); // Correct connection
     } else {
       stroke('red'); // Incorrect connection
+      selectedPoints.pop();
+      textSize(200)
+      text('YOU LOSE! :(', 200, 255)
+      stopStopwatch();
+      activated = false;
     }
 
     stroke(Math.abs(currentIndex - nextIndex) === 1 ? 'green' : 'red');
     line(currentPoint[0], currentPoint[1], nextPoint[0], nextPoint[1]);
   }
+  
+  if (selectedPoints.length == points.length + 1) {
+    textSize(200)
+    text('YOU WIN!', 0, 255)
+    stopStopwatch();
+    displayTimeTaken(); 
+  } 
+  
 }
   /*
   We need to add an if statement that determines if the selected point is the next point in order after the previous,
@@ -98,20 +133,65 @@ function draw() {
 
 
 function mousePressed() {
-  if (selectedPoints.length > 0) {
-    let lastPoint = selectedPoints[selectedPoints.length - 1];
-    if (dist(mouseX, mouseY, lastPoint[0], lastPoint[1]) < 10) {
-      selectedPoints.pop(); // Remove the last point
-      return; // Exit the function after undoing
+  if (activated) {
+    if (selectedPoints.length > 0) {
+      let lastPoint = selectedPoints[selectedPoints.length - 1];
+      if (dist(mouseX, mouseY, lastPoint[0], lastPoint[1]) < 10) {
+        selectedPoints.pop(); // Remove the last point
+        if (selectedPoints.length > 0) {
+          let previousPoint = selectedPoints[selectedPoints.length - 1];
+          strokeWeight(2);
+          stroke(255); // Set stroke color to white (background color) to "erase" the line
+          line(previousPoint[0], previousPoint[1], lastPoint[0], lastPoint[1]);
+        }  
+        return; // Exit the function after undoing
+      }
     }
-  }
   
-  for (let point of points) {
-    if (dist(mouseX, mouseY, point[0], point[1]) < 10) {
-      selectedPoints.push(point);
-      break;
+    for (let point of points) {
+      if (dist(mouseX, mouseY, point[0], point[1]) < 10) {
+        selectedPoints.push(point);
+        break;
+      }
     }
   }
+}
+
+function startStopwatch() {
+  startTime = Date.now() - elapsedTime;
+  interval = setInterval(() => {
+    elapsedTime = Date.now() - startTime;
+  }, 100);
+}
+
+function stopStopwatch() {
+  clearInterval(interval);
+}
+
+function resetStopwatch() {
+  clearInterval(interval);
+  elapsedTime = 0;
+}
+
+function formatTime(time) {
+  const milliseconds = Math.floor((time % 1000) / 100);
+  const seconds = Math.floor((time / 1000) % 60);
+  const minutes = Math.floor((time / (1000 * 60)) % 60);
+  const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
+  return (
+    (hours < 10 ? "0" + hours : hours) + ":" +
+    (minutes < 10 ? "0" + minutes : minutes) + ":" +
+    (seconds < 10 ? "0" + seconds : seconds) + "." +
+    + milliseconds
+  );
+}
+
+function displayTimeTaken() {
+  const timeTaken = formatTime(elapsedTime);
+  textSize(24);
+  fill('blue');
+  text('Time Taken: ' + timeTaken, 400, 300);
 }
 
 /* HashMap version of mousePressed()
@@ -132,5 +212,3 @@ let lastPoint = null;
     }
   }
 */
-
-  
