@@ -16,6 +16,17 @@ let number_of_bubbles = 0;
 let speed = 0; // will need to see how fast it moves
 let bubblesPopped = 0;
 
+function setup() {
+  createCanvas(1200, 515);
+}
+
+function draw() {
+  background(220);
+  background('white');
+  text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
+  dotUpdate();
+}
+
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
 function LevelSetting(levelNumber) {
   switch(levelNumber) {
@@ -41,12 +52,12 @@ function LevelSetting(levelNumber) {
 }
 
 const dotMap = new Map();
+const dotRadius = 30;
 
 // We can create a typing and clicking option as well.
 // Creates a dot somewhere within the canvas and adds its position to a HashMap containing dot locations.
 function CreateDots() {
   const dotNameSelection = 'abcdefghijklmnopqrstuvwxyz'; // possible keys available
-  const dotRadius = 30;
   let letter = Math.floor(Math.random() * (24)); // getting a letter position at random between 0 and 25 (inclusive)
   let dotNameGet = dotNameSelection.substring(letter, letter + 1); // fetching the letter from the string.
   
@@ -97,16 +108,9 @@ function LevelStart(levelNumber) {
   }
 }
 
-
-
-function setup() {
-  createCanvas(1200, 515);
-}
-
 // Updates all dots 60 times per second. Hopefully works!
 // future: maybe have the dots oscilate back and forth in the y-direction?
 function dotUpdate()  { 
-  const dotRadius = 30;
   for (let [key, value] of dotMap) {
     if (value[0] > 0) {
       text(key, value[0], value[1]);
@@ -128,11 +132,3 @@ node.addEventListener('keydown', function(event) {
     dotMap.remove(keyPressed);
   }
 })
-
-function draw() {
-  background(220);
-  background('white');
-  text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
-  dotUpdate();
-}
-
