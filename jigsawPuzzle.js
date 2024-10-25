@@ -6,6 +6,8 @@
   Use function mousePressed() for dragging pieces, and mouseReleased() to check if the distance of the piece is < 50 and if so, check the pieces sides
   if correct piece
 
+  p5.js actually has a lot of pre-built functions for dragging pieces
+
   function connect(firstImageRowCol, secondImageRowCol) {
     position both pieces together on the correct side
     create a new object of the two pieces together so they can't break apart
@@ -13,7 +15,7 @@
 
   function mousePressed() {
     pick image closest to mouse pointer
-    update image positioning to follow mouseX and mouseY
+    update image positioning using drag functions of p5js
     return false <- to prevent default web functions like highlighting
   }
   
