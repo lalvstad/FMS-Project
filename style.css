@@ -169,18 +169,20 @@ canvas {
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 100vh;
-  background-color: #f4eaff;
-  overflow: auto;
+  height: 90vh; /* */
+  background-color: #e0f1f3;
+  overflow: hidden;
 }
 
 .textBox :first-child {
+  display: flex;
+  justify-content: center;
   padding: 5px 0;
   padding-left: 15px;
   width: calc(100% + 15px);
   margin: -15px -15px 0 -15px;
-  background-color: rgb(234, 215, 255);
-  color: #655777;
+  background-color: #bee6ec;
+  color: #465658;
 }
  
 /* Connect The Dots Stylization */
@@ -222,7 +224,6 @@ canvas {
 }
 
 .textBoxDots {
-  
   border: 1px solid black;
   padding: 15px;
   margin: 0 auto;

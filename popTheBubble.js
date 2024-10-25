@@ -17,7 +17,7 @@ let speed = 0; // will need to see how fast it moves
 let bubblesPopped = 0;
 
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
-function levelSetting(levelNumber) {
+function LevelSetting(levelNumber) {
   switch(levelNumber) {
     case 1: 
       number_of_bubbles = 20;
@@ -44,7 +44,7 @@ const dotMap = new Map();
 
 // We can create a typing and clicking option as well.
 // Creates a dot somewhere within the canvas and adds its position to a HashMap containing dot locations.
-function createDots() {
+function CreateDots() {
   const dotNameSelection = 'abcdefghijklmnopqrstuvwxyz'; // possible keys available
   const dotRadius = 30;
   let letter = Math.floor(Math.random() * (24)); // getting a letter position at random between 0 and 25 (inclusive)
@@ -79,10 +79,21 @@ function createDots() {
   */
 }
 
-function levelStart(levelNumber) {
-  levelSetting(levelNumber);
+let LevelDisplayActivator = true;
+
+function LevelDisplay(levelNumber) {
+  if (LevelDisplayActivator) {
+    textSize(200);
+    text('LEVEL ${levelNumber}', 200, 255);
+    setTimeout(() => {clear();}, 5000);
+    LevelDisplayActivator = false;
+  }
+}
+
+function LevelStart(levelNumber) {
+  LevelSetting(levelNumber);
   for (let i = 0; i < number_of_bubbles; i++) {
-    setInterval(createDots(), 4000/speed + 500); // configures the amount of time between the creation of dots
+    setInterval(CreateDots(), 4000/speed + 500); // configures the amount of time between the creation of dots
   }
 }
 
@@ -122,7 +133,6 @@ function draw() {
   background(220);
   background('white');
   text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
-
   dotUpdate();
 }
 
