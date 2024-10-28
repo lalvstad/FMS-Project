@@ -19,6 +19,7 @@
         document.getElementById("bottomFlowerBanner").remove();
         let activity = document.getElementById("PuzzleActivity-container");
         activity.style.display = "block";
+        console.log("Game started");
       }
     </script>
   </head>
@@ -49,10 +50,10 @@
       </div>
   </div>
 
-  <div id="PuzzleActivity-container">
-    <script src="jigsawPuzzle.js", style="display: none;"></script>
-  </div>
-
+  <div id="PuzzleActivity-container" style="display: block;">
+    <canvas id="puzzleCanvas"></canvas>
+</div>
+  
   <script src="jigsawPuzzle.js"></script>
 
   <iframe
@@ -65,5 +66,6 @@
   </iframe>
 
   <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+  <script src="jigsawPuzzle.js"></script>
 </body>
 </html>
