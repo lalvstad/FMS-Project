@@ -86,16 +86,25 @@ function draw() {
   }
 
 // Congratulations! Message
-  if (puzzleCompleted) {
-    fill(255, 255, 255, 200); 
-    noStroke();
-    rect(width / 2 - 200, height / 2 - 40, 400, 80, 10);
+if (puzzleCompleted) {
+  let message1 = "Congratulations!";
+  let message2 = "You've completed the puzzle!";
 
-    fill(0, 150, 0);
-    textSize(32);
-    textAlign(CENTER, CENTER);
-    text("Congratulations! You've completed the puzzle!", width / 2, height / 2);
-  }
+  let textPadding = 20;
+  let maxTextWidth = max(textWidth(message1), textWidth(message2)) + textPadding;
+  let textHeight = 80;
+
+  fill(255, 255, 255, 200);
+  noStroke();
+  rect(width / 2 - maxTextWidth / 2, height / 2 - textHeight / 2, maxTextWidth, textHeight, 10);
+  
+  fill(0, 150, 0);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text(message1, width / 2, height / 2 - 16); // Adjust y position up for the first line
+  text(message2, width / 2, height / 2 + 16); // Adjust y position down for the second line
+}
+
 }
 
 
