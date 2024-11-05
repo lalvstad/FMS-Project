@@ -13,7 +13,7 @@ How bubbles get destroyed:
 
 
 let number_of_bubbles = 0;
-let speed = 0; // will need to see how fast it moves
+let speed = 0; // Important to know that this number * 60 is the amount of pixels travelled per second on screen.
 let bubblesPopped = 0;
 
 function setup() {
@@ -37,12 +37,12 @@ function LevelSetting(levelNumber) {
     break;
     case 2: 
       number_of_bubbles = 30;
-      speed = 3;
+      speed = 2;
       console.log('Level set to 2\nNumber of Bubbles is set to 30');
     default: 
       if (levelNumber > 2) {
         number_of_bubbles = levelNumber * 15;
-        speed = 5 + levelNumber * 1.10;
+        speed = 3 + (levelNumber * 0.80);
         console.log('Level set to ${levelNumber}\nNumber of Bubbles is set to ${number_of_bubbles}');
       }
       else {
@@ -63,21 +63,18 @@ function CreateDots() {
   
   // Prevents duplicate of the same letter
   let preventOverFlow = 0;
-  while (dotMap.has(dotNameGet)) { 
+  while (dotMap.has(dotNameGet) && preventOverFlow != 25) { 
     letter = Math.floor(Math.random() * (24));
     dotNameGet = dotNameSelection.substring(letter, letter + 1);
     preventOverFlow++;
-    if (preventOverFlow == 25) {
-      return false;
-    }
   }
   
   // Prevents infinite while loop @ ln 59
   if (dotMap.size() < 25) { 
     fill('light-blue');
     let dot = [];
-    dot[0] = Math.floor(Math.random() * (1200 - dotRadius + 1)); // dotX
-    dot[1] = Math.floor(Math.random() * (515 - dotRadius + 1)); // dotY
+    dot[0] = 1201 - dotRadius; // dotX
+    dot[1] = Math.floor(Math.random() * (516 - dotRadius)); // dotY
     ellipse(dot[0], dot[1], dotRadius, dotRadius);
     dotMap.set(dotNameGet, dot); // insert into HashMap
     // Need to create text that follows the bubble
