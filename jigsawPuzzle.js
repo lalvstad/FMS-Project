@@ -41,13 +41,40 @@ function createPuzzlePieces() {
   
 function draw() {
   background(220);
-  for (let piece of pieces) {
-      if (!piece.isPlaced) {
-          image(piece.img, piece.x, piece.y, pieceSize, pieceSize);
-      } else {
-          image(piece.img, piece.correctX, piece.correctY, pieceSize, pieceSize);
-      }
+  
+  // Draw placed pieces first (these will appear at the back)
+  let placedPieces = pieces.filter(piece => piece.isPlaced);
+  for (let piece of placedPieces) {
+      image(piece.img, piece.correctX, piece.correctY, pieceSize, pieceSize);
   }
+
+  // Draw unplaced pieces on top
+  let unplacedPieces = pieces.filter(piece => !piece.isPlaced);
+  for (let piece of unplacedPieces) {
+      image(piece.img, piece.x, piece.y, pieceSize, pieceSize);
+  }
+
+  // Display the "Congratulations" message when the puzzle is completed
+  if (puzzleCompleted) {
+    let message1 = "Congratulations!";
+    let message2 = "You've completed the puzzle!";
+
+    let textPadding = 20;
+    let maxTextWidth = max(textWidth(message1), textWidth(message2)) + textPadding;
+    let textHeight = 80;
+
+    fill(255, 255, 255, 200);
+    noStroke();
+    rect(width / 2 - maxTextWidth / 2, height / 2 - textHeight / 2, maxTextWidth, textHeight, 10);
+  
+    fill(0, 150, 0);
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    text(message1, width / 2, height / 2 - 16);
+    text(message2, width / 2, height / 2 + 16);
+  }
+}
+
 
 // Congratulations! Message
 if (puzzleCompleted) {
@@ -65,11 +92,10 @@ if (puzzleCompleted) {
   fill(0, 150, 0);
   textSize(32);
   textAlign(CENTER, CENTER);
-  text(message1, width / 2, height / 2 - 16); // Adjust y position up for the first line
-  text(message2, width / 2, height / 2 + 16); // Adjust y position down for the second line
+  text(message1, width / 2, height / 2 - 16);
+  text(message2, width / 2, height / 2 + 16); 
 }
 
-}
 
 
 function mousePressed() {
@@ -80,9 +106,8 @@ function mousePressed() {
           mouseY > piece.y && mouseY < piece.y + pieceSize &&
           !piece.isPlaced) {
           
-          // Move the piece to the front by removing it and adding it back at the end
-          pieces.splice(i, 1);   // Remove the piece from its current position
-          pieces.push(piece);    // Add it to the end of the array
+          pieces.splice(i, 1);
+          pieces.push(piece);
 
           draggingPiece = piece;
           offsetX = mouseX - piece.x;
