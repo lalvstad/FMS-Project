@@ -110,11 +110,16 @@ if (puzzleCompleted) {
 
 function mousePressed() {
   if (puzzleCompleted) return; 
-
-  for (let piece of pieces) {
+  for (let i = 0; i < pieces.length; i++) {
+      let piece = pieces[i];
       if (mouseX > piece.x && mouseX < piece.x + pieceSize &&
           mouseY > piece.y && mouseY < piece.y + pieceSize &&
           !piece.isPlaced) {
+          
+          // Move the piece to the front by removing it and adding it back at the end
+          pieces.splice(i, 1);   // Remove the piece from its current position
+          pieces.push(piece);    // Add it to the end of the array
+
           draggingPiece = piece;
           offsetX = mouseX - piece.x;
           offsetY = mouseY - piece.y;
@@ -122,6 +127,7 @@ function mousePressed() {
       }
   }
 }
+
 
 function mouseDragged() {
   if (draggingPiece) {
