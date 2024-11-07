@@ -13,8 +13,11 @@ How bubbles get destroyed:
 
 
 let number_of_bubbles = 0;
+let currentLevel = 1;
 let speed = 0; // Important to know that this number * 60 is the amount of pixels travelled per second on screen.
 let bubblesPopped = 0;
+let started = false;
+let alive = true;
 
 function setup() {
   createCanvas(1200, 515);
@@ -24,7 +27,26 @@ function draw() {
   background(220);
   background('white');
   text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
-  dotUpdate();
+  if (started) {
+    while (alive) {
+      dotUpdate();
+      if (number_of_bubbles === bubblesPopped) {
+        LevelDisplayActivator = true;
+        setTimeout(() => { LevelDisplay(); }, 3000);
+        bubblesPopped = 0;
+        
+      }
+    }
+    FailScreen();
+  }
+}
+
+function start() {
+  clear();
+  background();
+  started = true;
+  LevelStart(currentLevel);
+
 }
 
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
@@ -87,21 +109,31 @@ function CreateDots() {
   */
 }
 
-let LevelDisplayActivator = true;
-
 function LevelDisplay(levelNumber) {
-  if (LevelDisplayActivator) {
     textSize(200);
     text('LEVEL ${levelNumber}', 200, 255);
-    setTimeout(() => {clear();}, 5000);
-    LevelDisplayActivator = false;
-  }
+    setTimeout(() => { clear(); }, 5000);
+}
+
+function FailScreen() {
+  textSize(200);
+  text('Bubble Escaped!\nYou reached level ${levelNumber}', 200, 255);
+  let restartButton = createButton('RESTART');
+  restartButton.position(200, 270);
+  restartButton.mousePressed(refreshCanvas);
+}
+
+function refreshCanvas() {
+  clear();
+  background();
 }
 
 function LevelStart(levelNumber) {
   LevelSetting(levelNumber);
+  LevelDisplay(levelNumber)
+  currentLevel++;
   for (let i = 0; i < number_of_bubbles; i++) {
-    setInterval(CreateDots(), 4000/speed + 500); // configures the amount of time between the creation of dots
+    setTimeout(() => { CreateDots() }, 4000/speed + 500); // configures the amount of time between the creation of dots
   }
 }
 
@@ -114,8 +146,10 @@ function dotUpdate()  {
       value[0] -= speed;
       ellipse(value[0], value[1], dotRadius, dotRadius);
     }
-    if (value[0] <= 0) {
+    if (value[0] <= 0) { // Level Fail Event
       dotMap.delete(key);
+      alive = false;
+      FailScreen;
     }
   }
 }
