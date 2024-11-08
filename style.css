@@ -131,7 +131,7 @@ canvas {
   background-color: #d5bcf0;
 }
 
-.directions {
+.bubbleDirections {
   padding-top: 40px;
   padding-bottom: 40px;
 }
@@ -148,7 +148,7 @@ canvas {
   text-align: center;
 }
 
-.directions h2 {
+.bubbleDirections h2 {
   color: black;
   font-size: 7vh;
   font-family: 'Silkscreen';
@@ -156,7 +156,7 @@ canvas {
   
 }
 
-.directions h3 {
+.bubbleDirections h3 {
   color: #655777;
   font-size: 5vh;
   font-family: 'Silkscreen';
@@ -164,26 +164,26 @@ canvas {
   
 }
 
-.textBox {
+.textBoxBubble {
   border: 1px solid black;
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 90vh; /* */
-  background-color: #e0f1f3;
-  overflow: hidden;
+  height: 90vh; 
+  background-color: #f4ebff;
+  overflow: auto;
 }
 
-.textBox :first-child {
+.textBoxBubble :first-child {
   display: flex;
   justify-content: center;
-  padding: 5px 0;
+  padding 5px 0;
   padding-left: 15px;
   width: calc(100% + 15px);
   margin: -15px -15px 0 -15px;
-  background-color: #bee6ec;
-  color: #465658;
-}
+  background-color: #e8d6ff;
+  color: #655777;
+} 
  
 /* Connect The Dots Stylization */
 .connectTheDotsBG {
@@ -191,7 +191,7 @@ canvas {
 }
 
 .dotsDirections {
-  padding-top: 10px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
@@ -335,7 +335,7 @@ canvas {
   background-color: #9c6b10;
 }
 
-.textBox .startButton {
+.textBoxBubble .startButton {
   cursor: pointer;
   font-size: 4vh;
   border: none;
