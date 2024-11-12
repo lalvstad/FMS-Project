@@ -130,7 +130,7 @@ function refreshCanvas() {
 
 function LevelStart(levelNumber) {
   LevelSetting(levelNumber);
-  LevelDisplay(levelNumber)
+  LevelDisplay(levelNumber);
   currentLevel++;
   for (let i = 0; i < number_of_bubbles; i++) {
     setTimeout(() => { CreateDots() }, 4000/speed + 500); // configures the amount of time between the creation of dots
