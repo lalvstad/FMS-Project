@@ -6,6 +6,7 @@ let pieceSize;
 let draggingPiece = null;
 let offsetX, offsetY;
 let puzzleCompleted = false;
+let timer = 0;
 
 function preload() {
   img = loadImage("/images/BunnyPuzzle.png"); 
@@ -19,9 +20,12 @@ function setup() {
   createPuzzlePieces();
 
   textFont('Silkscreen');
+  timer = 0;
   }
 
 function createPuzzlePieces() {
+  pieces = [];
+
   for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
           let x = j * pieceSize;
@@ -54,24 +58,40 @@ function draw() {
       image(piece.img, piece.x, piece.y, pieceSize, pieceSize);
   }
 
+  // increment timer
+  if (!puzzleCompleted) {
+    timer += deltaTime / 1000; // increment in seconds
+  }
+
   // Display the "Congratulations" message when the puzzle is completed
   if (puzzleCompleted) {
     let message1 = "Congratulations!";
     let message2 = "You've completed the puzzle!";
+    let message3 = "Time: " + timer.toFixed(2) + " seconds"; // Display time
 
     let textPadding = 20;
-    let maxTextWidth = max(textWidth(message1), textWidth(message2)) + textPadding;
-    let textHeight = 80;
+    let lineSpacing = 40;
+    let maxTextWidth = max(textWidth(message1), textWidth(message2), textWidth(message3)) + textPadding;
+    let textHeight = 140;
+    
 
-    fill(255, 255, 255, 200);
+    fill(255, 255, 255, 230);
     noStroke();
     rect(width / 2 - maxTextWidth / 2, height / 2 - textHeight / 2, maxTextWidth, textHeight, 10);
   
     fill(0, 150, 0);
     textSize(32);
     textAlign(CENTER, CENTER);
-    text(message1, width / 2, height / 2 - 16);
-    text(message2, width / 2, height / 2 + 16);
+    text(message1, width / 2, height / 2 - lineSpacing);
+    text(message2, width / 2, height / 2);
+    text(message3, width / 2, height / 2 + lineSpacing);
+  } 
+  else {
+    // display timer top left
+    fill(0);
+    textSize(24);
+    textAlign(LEFT, TOP);
+    text("Time: " + timer.toFixed(2) + " seconds", 10, 10);
   }
 }
 
