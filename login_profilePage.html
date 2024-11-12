@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Page</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Silkscreen' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="navbar-dropdown.js"></script>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a href="main.html">Home</a>
+      <a href="login_page.html">Login</a>
+      <div class="dropdown">
+          <button class="dropbtn" onclick="getDropdown()">Activities</button>
+          <div class="dropdown-content" id="myDropdown">
+              <a href="connectTheDots_page.html">Connect The Dots</a>
+              <a href="popTheBubble_page.html">Pop The Bubble</a>
+              <a href="jigsawPuzzle_page.html">Jigsaw Puzzle</a>
+          </div>
+      </div>
+    </div>
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+    <div class="pfpBody">
+
+        <!-- Info Boxes -->
+        <div class="info-boxes">
+          <!-- Account Information Display -->
+          <div class="account-info">
+            <h2>Account Information</h2>
+            <p><strong>Username:</strong> your_username</p>
+            <p><strong>Email:</strong> your_email@example.com</p>
+            <p><strong>Date of Account Creation:</strong> 2024-01-01</p>
+          </div>
+  
+          <!-- High Scores Display -->
+          <div class="high-scores">
+            <h2>High Scores</h2>
+            <p><strong>Pop the Bubble:</strong> 000</p>
+            <p><strong>Jigsaw Puzzle:</strong> 00:00</p>
+            <p><strong>Connect the Dots:</strong> 00:00</p>
+          </div>
+        </div>
+  
+        <!-- Button Container -->
+        <div class="gameButton-container">
+        <a href="connectTheDots_page.html"><button>Connect The Dots</button></a>
+          <a href="popTheBubble_page.html"><button>Pop The Bubble</button></a>
+          <a href="jigsawPuzzle_page.html"><button>Jigsaw Puzzle</button></a>
+        </div>
+      </div>
+
+    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+  </body>
+</html>
