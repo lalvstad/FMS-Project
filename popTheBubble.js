@@ -21,20 +21,26 @@ let alive = true;
 
 function setup() {
   createCanvas(1200, 515);
+  textFont('Silkscreen');
 }
 
 function draw() {
   background(220);
   background('white');
   text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
+  if (!started) {
+    let startButton = createButton('START');
+    startButton.position(750, 270);
+    startButton.mousePressed(start);
+  }
   if (started) {
     while (alive) {
       dotUpdate();
       if (number_of_bubbles === bubblesPopped) {
         LevelDisplayActivator = true;
-        setTimeout(() => { LevelDisplay(); }, 3000);
+        currentLevel += 1;
+        LevelStart(currentLevel);
         bubblesPopped = 0;
-        
       }
     }
     FailScreen();
@@ -42,11 +48,8 @@ function draw() {
 }
 
 function start() {
-  clear();
-  background();
   started = true;
   LevelStart(currentLevel);
-
 }
 
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
@@ -61,23 +64,25 @@ function LevelSetting(levelNumber) {
       number_of_bubbles = 30;
       speed = 2;
       console.log('Level set to 2\nNumber of Bubbles is set to 30');
+    break;
     default: 
       if (levelNumber > 2) {
-        number_of_bubbles = levelNumber * 15;
-        speed = 3 + (levelNumber * 0.80);
+        number_of_bubbles = 30 + (levelNumber * 2);
+        speed = 2.0 + (levelNumber * 0.30);
         console.log('Level set to ${levelNumber}\nNumber of Bubbles is set to ${number_of_bubbles}');
       }
       else {
         throw new Error('Level number is invalid. Level number is less than 0');
       }
+    break;
   }
 }
-
+// Creates dot hash map
 const dotMap = new Map();
 const dotRadius = 30;
 
 // We can create a typing and clicking option as well.
-// Creates a dot somewhere within the canvas and adds its position to a HashMap containing dot locations.
+// Creates a dot somewhere along the right side of the canvas and adds its position as the value to a HashMap containing keys (letters).
 function CreateDots() {
   const dotNameSelection = 'abcdefghijklmnopqrstuvwxyz'; // possible keys available
   let letter = Math.floor(Math.random() * (24)); // getting a letter position at random between 0 and 25 (inclusive)
@@ -117,7 +122,7 @@ function LevelDisplay(levelNumber) {
 
 function FailScreen() {
   textSize(200);
-  text('Bubble Escaped!\nYou reached level ${levelNumber}', 200, 255);
+  text('Bubble Escaped!\nCongrats! You reached level ${levelNumber}', 200, 255);
   let restartButton = createButton('RESTART');
   restartButton.position(200, 270);
   restartButton.mousePressed(refreshCanvas);
@@ -131,9 +136,8 @@ function refreshCanvas() {
 function LevelStart(levelNumber) {
   LevelSetting(levelNumber);
   LevelDisplay(levelNumber);
-  currentLevel++;
   for (let i = 0; i < number_of_bubbles; i++) {
-    setTimeout(() => { CreateDots() }, 4000/speed + 500); // configures the amount of time between the creation of dots
+    setTimeout(() => { CreateDots() }, 4000/speed + 500); 
   }
 }
 
@@ -142,20 +146,20 @@ function LevelStart(levelNumber) {
 function dotUpdate()  { 
   for (let [key, value] of dotMap) {
     if (value[0] > 0) {
-      text(key, value[0], value[1]);
       value[0] -= speed;
       ellipse(value[0], value[1], dotRadius, dotRadius);
+      text(key, value[0], value[1]);
     }
     if (value[0] <= 0) { // Level Fail Event
       dotMap.delete(key);
       alive = false;
-      FailScreen;
+      break;
     }
   }
 }
 
-// Need to implement an EventListener waiting for the key-press of one of the keys in dotMap
-
+// I have no idea if this works, someone pls check
+// Listens for a key press and checks if that key is one of the bubbles on screen.
 node.addEventListener('keydown', function(event) {
   const keyPressed = event.key;
   if (dotMap.has(keyPressed)) {
