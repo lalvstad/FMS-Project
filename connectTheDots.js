@@ -1,8 +1,8 @@
 let points = [
   [510, 130], [350, 170], [250, 250], [200, 300], [170, 300],
-  [170, 330], [200, 330], [230, 330], [230, 420], [230, 510], [260, 510],
-  [260, 420], [500, 420], [500, 510], [530, 510], [530, 420], [820, 420],
-  [820, 510], [850, 510], [850, 420], [850, 330], [880, 330], [910, 330], [910, 300],
+  [170, 330], [200, 330], [230, 330], [230, 420], [230, 490], [260, 490],
+  [260, 420], [500, 420], [500, 490], [530, 490], [530, 420], [820, 420],
+  [820, 490], [850, 490], [850, 420], [850, 330], [880, 330], [910, 330], [910, 300],
   [880, 300], [820, 250], [700, 170]
 ];
 
@@ -14,6 +14,8 @@ function setup() {
   createCanvas(1200, 515);
   startStopwatch();
   textFont('Silkscreen');
+  textSize(25)
+  text('Category: BARN', 500, 50)
   let resetButton = createButton('Reset');
   resetButton.position(1200, 0);
   resetButton.mousePressed(resetPoints);
@@ -59,7 +61,7 @@ function draw() {
   if (selectedPoints.length == points.length + 1) {
     textSize(200)
     textFont('Silkscreen');
-    text('YOU WIN!', 0, 255)
+    text('YOU WIN! :)', 0, 255)
     stopStopwatch();
     displayTimeTaken(); 
   } 
