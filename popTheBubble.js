@@ -12,7 +12,7 @@ How bubbles get destroyed:
 */
 
 
-let number_of_bubbles = 0;
+let number_of_bubbles = 20;
 let currentLevel = 1;
 let speed = 0; // Important to know that this number * 60 is the amount of pixels travelled per second on screen.
 let bubblesPopped = 0;
@@ -24,32 +24,47 @@ function setup() {
   textFont('Silkscreen');
 }
 
+let dotCreationActive = false;
+
 function draw() {
   background(220);
-  background('white');
-  text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 1200, 0);
+  background("rebeccapurple");
   if (!started) {
-    let startButton = createButton('START');
+    const startButton = createButton('START');
     startButton.position(750, 270);
     startButton.mousePressed(start);
   }
   if (started) {
-    while (alive) {
-      dotUpdate();
-      if (number_of_bubbles === bubblesPopped) {
-        LevelDisplayActivator = true;
-        currentLevel += 1;
-        LevelStart(currentLevel);
-        bubblesPopped = 0;
+    text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 600, 50);
+    if (dotCreationActive) {
+      alive = true;
+      LevelSetting(currentLevel);
+      LevelDisplay(currentLevel);
+      for (let i = 0; i < number_of_bubbles; i++) {
+        setTimeout(() => {
+          CreateDots();
+        }, i * (2000 / speed + 500));
       }
+      dotCreationActive = false;
     }
-    FailScreen();
+    if (alive) {
+      dotUpdate();
+    }
+    if (!alive) {
+      FailScreen();
+    }
+    if (number_of_bubbles === bubblesPopped) {
+      LevelDisplayActivator = true;
+      currentLevel += 1;
+      bubblesPopped = 0;
+      dotCreationActive;
+    }
   }
 }
 
 function start() {
   started = true;
-  LevelStart(currentLevel);
+  dotCreationActive = true;
 }
 
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
@@ -80,6 +95,7 @@ function LevelSetting(levelNumber) {
 // Creates dot hash map
 const dotMap = new Map();
 const dotRadius = 30;
+let preventOverFlow = 0;
 
 // We can create a typing and clicking option as well.
 // Creates a dot somewhere along the right side of the canvas and adds its position as the value to a HashMap containing keys (letters).
@@ -89,15 +105,14 @@ function CreateDots() {
   let dotNameGet = dotNameSelection.substring(letter, letter + 1); // fetching the letter from the string.
   
   // Prevents duplicate of the same letter
-  let preventOverFlow = 0;
-  while (dotMap.has(dotNameGet) && preventOverFlow != 25) { 
+  while (dotMap.has(dotNameGet) && preventOverFlow < 25) { 
     letter = Math.floor(Math.random() * (24));
     dotNameGet = dotNameSelection.substring(letter, letter + 1);
     preventOverFlow++;
   }
   
   // Prevents infinite while loop @ ln 59
-  if (dotMap.size() < 25) { 
+  if (dotMap.size < 25) { 
     fill('light-blue');
     let dot = [];
     dot[0] = 1201 - dotRadius; // dotX
@@ -115,14 +130,15 @@ function CreateDots() {
 }
 
 function LevelDisplay(levelNumber) {
-    textSize(200);
+    textSize(50);
     text('LEVEL ${levelNumber}', 200, 255);
     setTimeout(() => { clear(); }, 5000);
 }
 
 function FailScreen() {
-  textSize(200);
+  textSize(50);
   text('Bubble Escaped!\nCongrats! You reached level ${levelNumber}', 200, 255);
+  started = false;
   let restartButton = createButton('RESTART');
   restartButton.position(200, 270);
   restartButton.mousePressed(refreshCanvas);
@@ -130,15 +146,8 @@ function FailScreen() {
 
 function refreshCanvas() {
   clear();
-  background();
-}
-
-function LevelStart(levelNumber) {
-  LevelSetting(levelNumber);
-  LevelDisplay(levelNumber);
-  for (let i = 0; i < number_of_bubbles; i++) {
-    setTimeout(() => { CreateDots() }, 4000/speed + 500); 
-  }
+  started = false;
+  dotMap = new Map();
 }
 
 // Updates all dots 60 times per second. Hopefully works!
@@ -151,8 +160,9 @@ function dotUpdate()  {
       text(key, value[0], value[1]);
     }
     if (value[0] <= 0) { // Level Fail Event
-      dotMap.delete(key);
+      refreshCanvas();
       alive = false;
+      dotCreationActive = false;
       break;
     }
   }
@@ -160,10 +170,11 @@ function dotUpdate()  {
 
 // I have no idea if this works, someone pls check
 // Listens for a key press and checks if that key is one of the bubbles on screen.
-node.addEventListener('keydown', function(event) {
+
+document.body.addEventListener('keydown', function(event) {
   const keyPressed = event.key;
   if (dotMap.has(keyPressed)) {
     bubblesPopped += 1;
-    dotMap.remove(keyPressed);
+    dotMap.delete(keyPressed);
   }
-})
+});
