@@ -31,19 +31,19 @@
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
     <form action="login_page.php" method="post">
       <div class="container">
-        <label for="uname"><b>Username</b></label>
+        <label for="uname"><b>Username:</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required>
       <div>  
-        <label for="psw"><b>Password</b></label>
+        <label for="psw"><b>Password:</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
       <div>
       <div class="forgot">      
         <button type="submit">LOGIN</button>
       </div>
-      <div class="container3">
-        <span class="psw"> <a href="forgot_password.html">FORGOT PASSWORD?</a></span>
-      </div>
     </form>
+    <div class="fpbutton">
+      <button onclick="window.location.href='forgot_password.html'">Forgot Password?</button>
+    </div>
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>
