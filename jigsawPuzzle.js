@@ -7,20 +7,49 @@ let draggingPiece = null;
 let offsetX, offsetY;
 let puzzleCompleted = false;
 let timer = 0;
+let finalTime = 0;
 
 function preload() {
   img = loadImage("/images/BunnyPuzzle.png"); 
 }
 
+// Track levels
+let currentLevel = 0;
+const levelConfigs = [
+  {imagePath: "/images/BunnyPuzzle.png", rows: 4, columns: 4},
+  {imagePath: "/images/UnicornPuzzle(2).png", rows: 5, columns: 5},
+  {imagePath: "/images/FarmPuzzle(3).png", rows: 6, columns: 6},
+];
+
+// Reset game for next level
+function loadLevel(level) {
+  if (level >= levelConfigs.length) {
+    console.log("All levels completed!");
+    puzzleCompleted = true;
+    return;
+  }
+
+  const config = levelConfigs[level];
+  loadImage(config.imagePath, (loadedImage) => {
+    img = loadedImage; // Assign the loaded image
+    rows = config.rows;
+    columns = config.columns;
+    pieceSize = width / columns;
+    img.resize(width, height);
+    createPuzzlePieces();
+    puzzleCompleted = false;
+    timer = 0;
+  });
+}
+
+
+
 function setup() {
   let canvas = createCanvas(800, 800);
   canvas.parent("PuzzleActivity-container");
-  pieceSize = width / columns;
-  img.resize(width, height);
-  createPuzzlePieces();
+  loadLevel(currentLevel);
 
   textFont('Silkscreen');
-  timer = 0;
   }
 
 function createPuzzlePieces() {
@@ -93,29 +122,8 @@ function draw() {
     textAlign(LEFT, TOP);
     text("Time: " + timer.toFixed(2) + " seconds", 10, 10);
   }
+
 }
-
-
-// Congratulations! Message
-if (puzzleCompleted) {
-  let message1 = "Congratulations!";
-  let message2 = "You've completed the puzzle!";
-
-  let textPadding = 20;
-  let maxTextWidth = max(textWidth(message1), textWidth(message2)) + textPadding;
-  let textHeight = 80;
-
-  fill(255, 255, 255, 200);
-  noStroke();
-  rect(width / 2 - maxTextWidth / 2, height / 2 - textHeight / 2, maxTextWidth, textHeight, 10);
-  
-  fill(0, 150, 0);
-  textSize(32);
-  textAlign(CENTER, CENTER);
-  text(message1, width / 2, height / 2 - 16);
-  text(message2, width / 2, height / 2 + 16); 
-}
-
 
 
 function mousePressed() {
@@ -166,6 +174,12 @@ function checkCompletion() {
   for (let piece of pieces) {
     if (!piece.isPlaced) return; 
   }
-  
-  puzzleCompleted = true; 
+
+  puzzleCompleted = true;
+  finalTime = timer;
+
+  setTimeout(() => {
+    currentLevel++;
+    loadLevel(currentLevel); // next level
+  }, 2000); 
 }
