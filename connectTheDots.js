@@ -6,6 +6,8 @@ let points = [
   [880, 300], [820, 250], [700, 170]
 ];
 
+let points2 = [];
+let points3 = [];
 let selectedPoints = [];
 let elapsedTime = 0;
 let activated = true;
@@ -47,9 +49,9 @@ function draw() {
     } else {
       stroke('red'); // Incorrect connection
       selectedPoints.pop();
-      textSize(200)
+      textSize(160)
       textFont('Silkscreen');
-      text('YOU LOSE! :(', 200, 255)
+      text('YOU LOSE! :(', 0, 255)
       stopStopwatch();
       activated = false;
     }
@@ -59,7 +61,7 @@ function draw() {
   }
   
   if (selectedPoints.length == points.length + 1) {
-    textSize(200)
+    textSize(163)
     textFont('Silkscreen');
     text('YOU WIN! :)', 0, 255)
     stopStopwatch();
