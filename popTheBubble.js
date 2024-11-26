@@ -11,6 +11,10 @@ How bubbles get destroyed:
       2:  Create red flash on screen
 */
 
+/* Known Bugs:
+  -   If the window is unfocused, bubbles will bunch up together on the right side. OK for now
+*/
+
 
 let number_of_bubbles = 20;
 let currentLevel = 1;
@@ -18,6 +22,7 @@ let speed = 0; // Important to know that this number * 60 is the amount of pixel
 let bubblesPopped = 0;
 let started = false;
 let alive = true;
+let justFailed = false;
 
 function setup() {
   createCanvas(1200, 515);
@@ -31,16 +36,27 @@ function draw() {
   background("rebeccapurple");
   if (!started) {
     const startButton = createButton('START');
-    startButton.position(750, 270);
+    startButton.position(920, 470); 
     startButton.mousePressed(start);
+    if (justFailed) { // If the user just failed we need to show them this text
+      textSize(50);
+      fill('white');
+      text('Bubble Escaped!', 200, 255);
+      text('You reached level ' + currentLevel, 200, 350);
+    }
   }
   if (started) {
-    text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 600, 50);
+    textSize(40);
+    fill('white');
+    text('Bubbles left: ' + (number_of_bubbles - bubblesPopped), 750, 50);
+    text('LEVEL ' + currentLevel, 25, 50);
     if (dotCreationActive) {
       alive = true;
-      LevelSetting(currentLevel);
-      LevelDisplay(currentLevel);
+      LevelSetting();
       for (let i = 0; i < number_of_bubbles; i++) {
+        if (justFailed) {
+          break;
+        }
         setTimeout(() => {
           CreateDots();
         }, i * (2000 / speed + 500));
@@ -51,47 +67,42 @@ function draw() {
       dotUpdate();
     }
     if (!alive) {
-      FailScreen();
+      justFailed = true;
+      dotCreationActive = false;
+      started = false;
     }
     if (number_of_bubbles === bubblesPopped) {
-      LevelDisplayActivator = true;
       currentLevel += 1;
       bubblesPopped = 0;
-      dotCreationActive;
+      dotCreationActive = true;
     }
   }
 }
 
 function start() {
+  justFailed = false;
   started = true;
   dotCreationActive = true;
 }
 
 // leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
-function LevelSetting(levelNumber) {
-  switch(levelNumber) {
-    case 1: 
+function LevelSetting() {
+  if (currentLevel === 1) {
       number_of_bubbles = 20;
       speed = 1;
       console.log('Level set to 1\nNumber of Bubbles is set to 20');
-    break;
-    case 2: 
+  }
+  else if (currentLevel === 2) {
       number_of_bubbles = 30;
       speed = 2;
       console.log('Level set to 2\nNumber of Bubbles is set to 30');
-    break;
-    default: 
-      if (levelNumber > 2) {
-        number_of_bubbles = 30 + (levelNumber * 2);
-        speed = 2.0 + (levelNumber * 0.30);
-        console.log('Level set to ${levelNumber}\nNumber of Bubbles is set to ${number_of_bubbles}');
-      }
-      else {
-        throw new Error('Level number is invalid. Level number is less than 0');
-      }
-    break;
   }
-}
+  else {
+      number_of_bubbles = 30 + (currentLevel * 2);
+      speed = 2.0 + (currentLevel * 0.30);
+      console.log('Level set to ${currentLevel}\nNumber of Bubbles is set to ${number_of_bubbles}');
+    }
+  }
 // Creates dot hash map
 const dotMap = new Map();
 const dotRadius = 30;
@@ -116,7 +127,7 @@ function CreateDots() {
     fill('light-blue');
     let dot = [];
     dot[0] = 1201 - dotRadius; // dotX
-    dot[1] = Math.floor(Math.random() * (516 - dotRadius)); // dotY
+    dot[1] = Math.floor(Math.random() * (420 - dotRadius) + 50); // dotY, 50 gives padding from the top text, 466 is Screen size in the y-direction - 50
     ellipse(dot[0], dot[1], dotRadius, dotRadius);
     dotMap.set(dotNameGet, dot); // insert into HashMap
     // Need to create text that follows the bubble
@@ -129,38 +140,19 @@ function CreateDots() {
   */
 }
 
-function LevelDisplay(levelNumber) {
-    textSize(50);
-    text('LEVEL ${levelNumber}', 200, 255);
-    setTimeout(() => { clear(); }, 5000);
-}
-
-function FailScreen() {
-  textSize(50);
-  text('Bubble Escaped!\nCongrats! You reached level ${levelNumber}', 200, 255);
-  started = false;
-  let restartButton = createButton('RESTART');
-  restartButton.position(200, 270);
-  restartButton.mousePressed(refreshCanvas);
-}
-
-function refreshCanvas() {
-  clear();
-  started = false;
-  dotMap = new Map();
-}
-
 // Updates all dots 60 times per second. Hopefully works!
 // future: maybe have the dots oscilate back and forth in the y-direction?
 function dotUpdate()  { 
   for (let [key, value] of dotMap) {
     if (value[0] > 0) {
       value[0] -= speed;
+      fill('white');
       ellipse(value[0], value[1], dotRadius, dotRadius);
-      text(key, value[0], value[1]);
+      fill('black');
+      textSize(30);
+      text(key, value[0] - 8.5, value[1] + 10);
     }
     if (value[0] <= 0) { // Level Fail Event
-      refreshCanvas();
       alive = false;
       dotCreationActive = false;
       break;
