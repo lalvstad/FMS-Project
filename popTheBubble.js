@@ -7,14 +7,13 @@ How bubbles get destroyed:
       4:  Add +1 to correct counter
       5:  Play a positive noise
 -   The bubble leaves the screen dimensions on the left side
-      1:  If dotX is less than or equal to 0, delete key/value association in dotMap 
-      2:  Create red flash on screen
+      1:  If dotX is less than or equal to 0, delete key/value association in dotMap.
+      2:  Initiate fail screen
 */
 
 /* Known Bugs:
   -   If the window is unfocused, bubbles will bunch up together on the right side. OK for now
 */
-
 
 let number_of_bubbles = 20;
 let currentLevel = 1;
@@ -23,6 +22,7 @@ let bubblesPopped = 0;
 let started = false;
 let alive = true;
 let justFailed = false;
+let timeoutIds = [];
 
 function setup() {
   createCanvas(1200, 515);
@@ -36,9 +36,9 @@ function draw() {
   background("rebeccapurple");
   if (!started) {
     const startButton = createButton('START');
-    startButton.position(920, 470); 
+    startButton.position(720, 470); 
     startButton.mousePressed(start);
-    if (justFailed) { // If the user just failed we need to show them this text
+    if (justFailed) { // Level fail needs to be here in order to be drawn correctly
       textSize(50);
       fill('white');
       text('Bubble Escaped!', 200, 255);
@@ -52,14 +52,15 @@ function draw() {
     text('LEVEL ' + currentLevel, 25, 50);
     if (dotCreationActive) {
       alive = true;
-      LevelSetting();
+      levelSetting();
       for (let i = 0; i < number_of_bubbles; i++) {
         if (justFailed) {
           break;
         }
-        setTimeout(() => {
-          CreateDots();
+        let timeoutId = setTimeout(() => {
+          createDots();
         }, i * (2000 / speed + 500));
+        timeoutIds.push(timeoutId); // timeout IDs need to be stored so we can clear the queue of createDots() functions that continue after level failure
       }
       dotCreationActive = false;
     }
@@ -70,6 +71,9 @@ function draw() {
       justFailed = true;
       dotCreationActive = false;
       started = false;
+
+      timeoutIds.forEach(clearTimeout);
+      timeoutIds = [];
     }
     if (number_of_bubbles === bubblesPopped) {
       currentLevel += 1;
@@ -81,12 +85,13 @@ function draw() {
 
 function start() {
   justFailed = false;
+  currentLevel = 1;
   started = true;
   dotCreationActive = true;
 }
 
-// leveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
-function LevelSetting() {
+// LeveSetting is called at the start of the game, and will be called after popping all bubbles of the previous level.
+function levelSetting() {
   if (currentLevel === 1) {
       number_of_bubbles = 20;
       speed = 1;
@@ -110,7 +115,7 @@ let preventOverFlow = 0;
 
 // We can create a typing and clicking option as well.
 // Creates a dot somewhere along the right side of the canvas and adds its position as the value to a HashMap containing keys (letters).
-function CreateDots() {
+function createDots() {
   const dotNameSelection = 'abcdefghijklmnopqrstuvwxyz'; // possible keys available
   let letter = Math.floor(Math.random() * (24)); // getting a letter position at random between 0 and 25 (inclusive)
   let dotNameGet = dotNameSelection.substring(letter, letter + 1); // fetching the letter from the string.
@@ -153,6 +158,9 @@ function dotUpdate()  {
       text(key, value[0] - 8.5, value[1] + 10);
     }
     if (value[0] <= 0) { // Level Fail Event
+      for (let [key, value] of dotMap) {
+        dotMap.delete(key);
+      }
       alive = false;
       dotCreationActive = false;
       break;
@@ -160,9 +168,7 @@ function dotUpdate()  {
   }
 }
 
-// I have no idea if this works, someone pls check
 // Listens for a key press and checks if that key is one of the bubbles on screen.
-
 document.body.addEventListener('keydown', function(event) {
   const keyPressed = event.key;
   if (dotMap.has(keyPressed)) {

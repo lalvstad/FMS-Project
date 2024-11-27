@@ -10,6 +10,24 @@ canvas {
   padding: 10px;
 }
 
+/* Modifies the scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 /* .topnav is the main navigation bar division */
 .topnav {
   background-color: #ffd1d3;
@@ -546,5 +564,3 @@ iframe {
 .gameButton-container button:hover {
   background-color: #775b8d;
 }
-
-
