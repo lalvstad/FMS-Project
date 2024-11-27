@@ -10,6 +10,24 @@ canvas {
   padding: 10px;
 }
 
+/* Modifies the scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 /* .topnav is the main navigation bar division */
 .topnav {
   background-color: #ffd1d3;
@@ -100,6 +118,15 @@ canvas {
   
 }
 
+.logoContainerfp {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+  
+}
+
  .welcomeText {
   text-align: center;
   font-family: 'Kanit';
@@ -107,6 +134,16 @@ canvas {
   font-size: 3rem;
   margin-top: 20px;
   margin-bottom: -40px;
+
+}
+
+.forgotpassword {
+  text-align: center;
+  font-family: 'Kanit';
+  color: rgb(97, 168, 153);
+  font-size: 3rem;
+  margin-top: 20px;
+  margin-bottom: -20px;
 
 }
 
@@ -131,7 +168,7 @@ canvas {
   background-color: #d5bcf0;
 }
 
-.directions {
+.bubbleDirections {
   padding-top: 40px;
   padding-bottom: 40px;
 }
@@ -148,7 +185,7 @@ canvas {
   text-align: center;
 }
 
-.directions h2 {
+.bubbleDirections h2 {
   color: black;
   font-size: 7vh;
   font-family: 'Silkscreen';
@@ -156,7 +193,7 @@ canvas {
   
 }
 
-.directions h3 {
+.bubbleDirections h3 {
   color: #655777;
   font-size: 5vh;
   font-family: 'Silkscreen';
@@ -164,22 +201,24 @@ canvas {
   
 }
 
-.textBox {
+.textBoxBubble {
   border: 1px solid black;
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 100vh;
-  background-color: #f4eaff;
+  height: 80vh; /* */
+  background-color: #e7def3;
   overflow: auto;
 }
 
-.textBox :first-child {
+.textBoxBubble :first-child {
+  display: flex;
+  justify-content: center;
   padding: 5px 0;
   padding-left: 15px;
   width: calc(100% + 15px);
   margin: -15px -15px 0 -15px;
-  background-color: rgb(234, 215, 255);
+  background-color: #e1cdfc;
   color: #655777;
 }
  
@@ -189,7 +228,7 @@ canvas {
 }
 
 .dotsDirections {
-  padding-top: 10px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
@@ -222,14 +261,14 @@ canvas {
 }
 
 .textBoxDots {
-  
   border: 1px solid black;
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 90vh; /* */
+  height: 80vh; /* */
   background-color: #e0f1f3;
-  overflow: hidden;
+  flex-direction: column; 
+  overflow: auto;
 }
 
 .textBoxDots :first-child {
@@ -244,6 +283,7 @@ canvas {
 }
 
 /* Jigsaw Puzzle Stylization */
+
 .puzzleBG {
   background-color: #ffc760;
 }
@@ -285,7 +325,7 @@ canvas {
   padding: 15px;
   margin: 0 auto;
   width: 50%;
-  height: 100vh;
+  height: 80vh;
   background-color: #fff6e4;
   overflow: auto;
 }
@@ -311,7 +351,7 @@ canvas {
   display: block;
   margin: 0 auto;
   min-width: 200px;
-  width: 20%;
+  width: fit-content;
   font-family: 'Silkscreen';
   text-align : center;
   background-color: #465658;
@@ -327,13 +367,13 @@ canvas {
   display: block;
   margin: 0 auto;
   min-width: 200px;
-  width: 20%;
+  width: fit-content;
   font-family: 'Silkscreen';
   text-align : center;
   background-color: #9c6b10;
 }
 
-.textBox .startButton {
+.textBoxBubble .startButton {
   cursor: pointer;
   font-size: 4vh;
   border: none;
@@ -343,7 +383,7 @@ canvas {
   display : block;
   margin : 0 auto;
   min-width: 200px;
-  width: 20%;
+  width: fit-content;
   font-family: 'Silkscreen';
   text-align : center;
   background-color: #655777;
@@ -376,6 +416,19 @@ input[type=text], input[type=password] {
   font-size: 20px;
 }
 
+.fpbutton button {
+  color: #416055ff;
+  background-color: #bee8daff;
+  padding: 14px 20px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  font-family: 'Kanit';
+  font-size: 20px;
+}
+
  .container3 {
   text-align: center;
   font-family: 'Kanit';
@@ -394,9 +447,16 @@ button:hover {
   text-align: center;
   font-family: 'Silkscreen';
   font-size: 25px;
-  padding: 25px;
+  padding: 20px;
 }
 
+.fpbutton {
+  text-align: center;
+  font-family: 'Silkscreen';
+  font-size: 25px;
+
+  padding: 0 20px;
+}
 
 iframe {
   display: none;
@@ -422,3 +482,85 @@ iframe {
 }
 
 
+/* Formating for Profile Page */
+.pfpBody {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Flex container for both info boxes */
+.info-boxes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.high-scores h2 {
+  font-family: 'Silkscreen';
+  font-size: 3rem;
+  color: #8469a1;
+}
+
+.account-info h2 {
+  font-family: 'Silkscreen';
+  font-size: 3rem;
+  color: #8469a1;
+}
+
+.high-scores p {
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.5rem;
+  color: #8469a1;
+}
+
+.account-info p {
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.5rem;
+  color: #8469a1;
+}
+.account-info, .high-scores {
+  margin: 10px;
+  padding: 15px;
+  background-color: #e9fcff;
+  border: 1px solid #e9fcff;
+  border-radius: 8px;
+  width: 45%;
+  text-align: left;
+  height: 50vh;
+  box-sizing: border-box;
+}
+
+/* Container for game buttons */
+.gameButton-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  min-height: 50px;
+  height: 15%;
+
+}
+
+/* Button styling */
+.gameButton-container button {
+  padding: 10px 20px;
+  font-size: 2rem;
+  font-family: 'Silkscreen';
+  background-color: #9679b6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: fit-content;
+}
+
+/* Button hover effect */
+.gameButton-container button:hover {
+  background-color: #775b8d;
+}

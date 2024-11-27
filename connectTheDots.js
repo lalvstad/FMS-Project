@@ -1,11 +1,13 @@
 let points = [
-  [510, 80], [350, 120], [250, 200], [200, 250], [170, 250],
-  [170, 280], [200, 280], [230, 280], [230, 370], [230, 460], [260, 460],
-  [260, 370], [500, 370], [500, 460], [530, 460], [530, 370], [820, 370],
-  [820, 460], [850, 460], [850, 370], [850, 280], [880, 280], [910, 280], [910, 250],
-  [880, 250], [820, 200], [700, 120]
+  [510, 130], [350, 170], [250, 250], [200, 300], [170, 300],
+  [170, 330], [200, 330], [230, 330], [230, 420], [230, 490], [260, 490],
+  [260, 420], [500, 420], [500, 490], [530, 490], [530, 420], [820, 420],
+  [820, 490], [850, 490], [850, 420], [850, 330], [880, 330], [910, 330], [910, 300],
+  [880, 300], [820, 250], [700, 170]
 ];
 
+let points2 = [];
+let points3 = [];
 let selectedPoints = [];
 let elapsedTime = 0;
 let activated = true;
@@ -13,13 +15,18 @@ let activated = true;
 function setup() { 
   createCanvas(1200, 515);
   startStopwatch();
+  textFont('Silkscreen');
+  textSize(25)
+  text('Category: BARN', 500, 50)
   let resetButton = createButton('Reset');
   resetButton.position(1200, 0);
   resetButton.mousePressed(resetPoints);
+  
 }
 
 function draw() {
   // Draw points
+  
   drawPoints();
 
   // Creates reset button
@@ -42,8 +49,9 @@ function draw() {
     } else {
       stroke('red'); // Incorrect connection
       selectedPoints.pop();
-      textSize(200)
-      text('YOU LOSE! :(', 200, 255)
+      textSize(160)
+      textFont('Silkscreen');
+      text('YOU LOSE! :(', 0, 255)
       stopStopwatch();
       activated = false;
     }
@@ -53,8 +61,9 @@ function draw() {
   }
   
   if (selectedPoints.length == points.length + 1) {
-    textSize(200)
-    text('YOU WIN!', 0, 255)
+    textSize(163)
+    textFont('Silkscreen');
+    text('YOU WIN! :)', 0, 255)
     stopStopwatch();
     displayTimeTaken(); 
   } 
@@ -140,5 +149,6 @@ function displayTimeTaken() {
   const timeTaken = formatTime(elapsedTime);
   textSize(24);
   fill('blue');
+  textFont('Silkscreen');
   text('Time Taken: ' + timeTaken, 400, 300);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,8 @@
     <title>Jigsaw Puzzle</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link href='https://fonts.googleapis.com/css?family=Silkscreen' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Silkscreen" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
@@ -17,8 +17,8 @@
       function startGame() {
         document.getElementById("puzzleInstructions").remove();
         document.getElementById("bottomFlowerBanner").remove();
-        let activity = document.getElementById("PuzzleActivity-container");
-        activity.style.display = "block";
+        document.getElementById("PuzzleActivity-container").style.display = "block";
+        console.log("Game started");
       }
     </script>
   </head>
@@ -37,33 +37,28 @@
       </div>
     </div>
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
-
     <div class="puzzleTitle">
       <h1>Jigsaw Puzzle!</h1>
     </div>
-  <div class="puzzleDirections" id="puzzleInstructions">
+    <div class="puzzleDirections" id="puzzleInstructions">
       <div class="textBoxPuzzle">
-        <h2>DIRECTIONS:<h2>
-        <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects, but the screen flashes red. Good luck solving!</h3>
+        <h2>DIRECTIONS:</h2>
+        <h3>Drag and drop the corresponding puzzle piece into the place it fits! If it's correct, it connects. Try to get the best time possible. Good luck solving!</h3>
         <button class="startButton" onclick="startGame()">Start</button>
       </div>
-  </div>
+    </div>
 
-  <div id="PuzzleActivity-container">
-    <script src="jigsawPuzzle.js", style="display: none;"></script>
-  </div>
-
-  <script src="jigsawPuzzle.js"></script>
-
-  <iframe
-  id="PuzzleActivity-container"
-  src = "jigsawLoader.html"
-  name = "targetframe"
-  allowTransparency="true"
-  scrolling = "no"
-  frameboarder="0">
-  </iframe>
-
-  <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
-</body>
+    <div id="PuzzleActivity-container" style="display: none; text-align: center;">
+      <iframe
+        src="jigsawLoader.html"
+        name="targetframe"
+        allowtransparency="true"
+        scrolling="no"
+        frameborder="0"
+        style="width: 100%; height: 500px;">
+      </iframe>
+    </div>
+    <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+    <script src="jigsawPuzzle.js"></script>
+  </body>
 </html>

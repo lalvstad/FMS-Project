@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login Page</title>
+    <title>Sign-Up Page</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Silkscreen' rel='stylesheet'>
@@ -28,22 +27,34 @@
           </div>
       </div>
     </div>
+
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
-    <form action="login_page.php" method="post">
-      <div class="container">
-        <label for="uname"><b>Username:</b></label>
+
+    <!-- Form Container -->
+    <div class="form-container">
+      <form action="signup_page.php" method="post">
+        <label for="fullname"><b>Full Name</b></label>
+        <input type="text" placeholder="Enter Full Name" name="fullname" required>
+        
+        <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required>
-      <div>  
-        <label for="psw"><b>Password:</b></label>
+        
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="email" required>
+        
+        <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
-      <div>
-      <div class="forgot">      
-        <button type="submit" onclick="window.location.href='login_profilePage.html'">LOGIN</button>
-      </div>
-    </form>
-    <div class="fpbutton">
-      <button onclick="window.location.href='forgot_password.html'">Forgot Password?</button>
+        
+        <label for="confirm_psw"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Confirm Password" name="confirm_psw" required>
+        
+        <div class="forgot">      
+            <button type="submit">SIGN UP</button>
+          </div>
+      </form>
     </div>
+
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>
+

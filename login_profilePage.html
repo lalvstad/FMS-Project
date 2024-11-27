@@ -29,21 +29,35 @@
       </div>
     </div>
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
-    <form action="login_page.php" method="post">
-      <div class="container">
-        <label for="uname"><b>Username:</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-      <div>  
-        <label for="psw"><b>Password:</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-      <div>
-      <div class="forgot">      
-        <button type="submit" onclick="window.location.href='login_profilePage.html'">LOGIN</button>
+    <div class="pfpBody">
+
+        <!-- Info Boxes -->
+        <div class="info-boxes">
+          <!-- Account Information Display -->
+          <div class="account-info">
+            <h2>Account Information</h2>
+            <p><strong>Username:</strong> your_username</p>
+            <p><strong>Email:</strong> your_email@example.com</p>
+            <p><strong>Date of Account Creation:</strong> 2024-01-01</p>
+          </div>
+  
+          <!-- High Scores Display -->
+          <div class="high-scores">
+            <h2>High Scores</h2>
+            <p><strong>Pop the Bubble:</strong> Level 0</p>
+            <p><strong>Jigsaw Puzzle:</strong> 00:00</p>
+            <p><strong>Connect the Dots:</strong> 00:00</p>
+          </div>
+        </div>
+  
+        <!-- Button Container -->
+        <div class="gameButton-container">
+        <a href="connectTheDots_page.html"><button>Connect The Dots</button></a>
+          <a href="popTheBubble_page.html"><button>Pop The Bubble</button></a>
+          <a href="jigsawPuzzle_page.html"><button>Jigsaw Puzzle</button></a>
+        </div>
       </div>
-    </form>
-    <div class="fpbutton">
-      <button onclick="window.location.href='forgot_password.html'">Forgot Password?</button>
-    </div>
+
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
 </html>
