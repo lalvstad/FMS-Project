@@ -13,6 +13,7 @@
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
     <script src="navbar-dropdown.js"></script>
+    <script src="localStorageManager.js"></script>
   </head>
 
   <body>
@@ -44,9 +45,9 @@
           <!-- High Scores Display -->
           <div class="high-scores">
             <h2>High Scores</h2>
-            <p><strong>Pop the Bubble:</strong> Level 0</p>
-            <p><strong>Jigsaw Puzzle:</strong> 00:00</p>
-            <p><strong>Connect the Dots:</strong> 00:00</p>
+            <p><strong>Pop the Bubble:</strong> Level <p id="bubbleScore"></p>1</p>
+            <p><strong>Jigsaw Puzzle:</strong> <p id="jigsawScore"></p>00:00</p>
+            <p><strong>Connect the Dots:</strong> <p id="dotsScore"></p>00:00</p>
           </div>
         </div>
   
@@ -60,4 +61,16 @@
 
     <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
   </body>
+  <script>
+    /*
+    window.onload = () => {
+      let retrievedScoreInfo = localStorage.getItem('score-list');
+      let parsedObject = JSON.parse(retrievedScoreInfo);
+
+      document.getElementById('bubbleScore').innerHTML = parsedObject.scores[0].bubbleHS;
+      document.getElementById('jigsawScore').innerHTML = parsedObject.scores[2].jigsawHS;
+      document.getElementById('dotsScore').innerHTML = parsedObject.scores[1].dotsHS;
+    }
+    */
+  </script>
 </html>
