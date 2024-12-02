@@ -17,7 +17,7 @@ export function setJigsawPuzzleHS(time) {
     saveInfo();
 }
 
-export function saveInfo() {
+function saveInfo() {
     let scoreInfo = `{"scores":[{"bubbleHS":"${popTheBubbleHighScore}"},{"dotsHS":"${connectTheDotsHighScore}"},{"jigsawHS":"${jigsawPuzzleHighScore}"}]}`;
     localStorage.setItem('score-list', scoreInfo);
 }
