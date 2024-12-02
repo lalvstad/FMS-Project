@@ -42,8 +42,6 @@ function loadLevel(level) {
   });
 }
 
-
-
 function setup() {
   let canvas = createCanvas(800, 800);
   canvas.parent("PuzzleActivity-container");
@@ -97,6 +95,8 @@ function draw() {
     let message1 = "Congratulations!";
     let message2 = "You've completed the puzzle!";
     let message3 = "Time: " + timer.toFixed(2) + " seconds"; // Display time
+    // Saves score to local storage
+    setJigsawPuzzleHS(timer.toFixed(2));
 
     let textPadding = 20;
     let lineSpacing = 40;
@@ -144,7 +144,6 @@ function mousePressed() {
       }
   }
 }
-
 
 function mouseDragged() {
   if (draggingPiece) {

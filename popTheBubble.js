@@ -23,6 +23,7 @@ let started = false;
 let alive = true;
 let justFailed = false;
 let timeoutIds = [];
+let totalScore = 0;
 
 function setup() {
   createCanvas(1200, 515);
@@ -145,7 +146,7 @@ function createDots() {
   */
 }
 
-// Updates all dots 60 times per second. Hopefully works!
+// Updates all dots 60 times per second.
 // future: maybe have the dots oscilate back and forth in the y-direction?
 function dotUpdate()  { 
   for (let [key, value] of dotMap) {
@@ -173,6 +174,7 @@ document.body.addEventListener('keydown', function(event) {
   const keyPressed = event.key;
   if (dotMap.has(keyPressed)) {
     bubblesPopped += 1;
+    totalScore++;
     dotMap.delete(keyPressed);
   }
 });
