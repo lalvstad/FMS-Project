@@ -95,14 +95,11 @@ function draw() {
     let message1 = "Congratulations!";
     let message2 = "You've completed the puzzle!";
     let message3 = "Time: " + timer.toFixed(2) + " seconds"; // Display time
-    // Saves score to local storage
-    setJigsawPuzzleHS(timer.toFixed(2));
 
     let textPadding = 20;
     let lineSpacing = 40;
     let maxTextWidth = max(textWidth(message1), textWidth(message2), textWidth(message3)) + textPadding;
     let textHeight = 140;
-    
 
     fill(255, 255, 255, 230);
     noStroke();
