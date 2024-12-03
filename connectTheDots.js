@@ -56,7 +56,7 @@ let points2 = [
 
 let levels = [points, points2, points3];
 let level = 0;
-let countdown = 10; // 10-second timer for level transitions
+let countdown = 5; // 5-second timer for level transitions
 let selectedPoints = [];
 let elapsedTime = 0;
 let activated = true;
