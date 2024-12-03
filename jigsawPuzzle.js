@@ -8,6 +8,7 @@ let offsetX, offsetY;
 let puzzleCompleted = false;
 let timer = 0;
 let finalTime = 0;
+let gameStarted = false;
 
 function preload() {
   img = loadImage("./images/BunnyPuzzle.png"); 
@@ -85,7 +86,7 @@ function draw() {
   }
 
   // increment timer
-  if (!puzzleCompleted) {
+  if (gameStarted  && !puzzleCompleted) {
     timer += deltaTime / 1000; // increment in seconds
   }
 
