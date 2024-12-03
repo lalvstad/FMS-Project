@@ -6,52 +6,52 @@ let points = [
   [880, 300], [820, 250], [700, 170]
 ];
 
-let points2 = [
-  [450.0, 120.0],
- [360.0, 130.0],
- [320.0, 120.0],
- [295.0, 70.0],
- [300.0, 120.0],
- [340.0, 165.0],
- [310.0, 175.0],
- [280.0, 160.0],
- [245.0, 180.0],
- [255.0, 220.0],
- [290.0, 255.0],
- [335.0, 245.0],
- [325.0, 260.0],
- [330.0, 300.0],
- [337.5, 340.0],
- [355.0, 390.0],
- [352.5, 435.0],
- [370.0, 450.0],
- [450.0, 467.5],
- [530.0, 450.0],
- [547.5, 435.0],
- [545.0, 390.0],
- [562.5, 340.0],
- [570.0, 300.0],
- [575.0, 260.0],
- [565.0, 245.0],
- [610.0, 255.0],
- [645.0, 220.0],
- [655.0, 180.0],
- [620.0, 160.0],
- [590.0, 175.0],
- [560.0, 165.0],
- [600.0, 120.0],
- [605.0, 70.0],
- [580.0, 120.0],
- [540.0, 130.0]
+let points3 = [
+  [550.0, 125.0],
+[460.0, 135.0],
+ [420.0, 125.0],
+ [395.0, 75.0],
+ [400.0, 125.0],
+ [440.0, 170.0],
+ [410.0, 180.0],
+ [380.0, 165.0],
+ [345.0, 185.0],
+ [355.0, 225.0],
+ [390.0, 260.0],
+ [435.0, 250.0],
+ [425.0, 265.0],
+ [430.0, 305.0],
+ [437.5, 345.0],
+ [455.0, 395.0],
+ [452.5, 440.0],
+ [470.0, 455.0],
+ [550.0, 472.5],
+ [630.0, 455.0],
+ [647.5, 440.0],
+ [645.0, 395.0],
+ [662.5, 345.0],
+ [670.0, 305.0],
+ [675.0, 265.0],
+ [665.0, 250.0],
+ [710.0, 260.0],
+ [745.0, 225.0],
+ [755.0, 185.0],
+ [720.0, 165.0],
+ [690.0, 180.0],
+ [660.0, 170.0],
+ [700.0, 125.0],
+ [705.0, 75.0],
+ [680.0, 125.0],
+ [640.0, 135.0]
 ];
 
-let points3 = [
-  [200, 200], [150, 50], [80, 120], [135, 120], [170, 190], [90, 280],
-  [150, 350], [150, 295], [185, 235], [150, 400], [120, 400], [120, 500],
-  [175, 500], [180, 470], [190, 450], [210, 450], [220, 470],
-  [225, 500], [280, 500], [280, 400], [250, 400], [225, 240], [250, 320],
-  [320, 250], [270, 250], [220, 210], [290, 100], [225, 50], [240, 120],
-  [220, 170], 
+let points2 = [
+  [600, 200], [550, 90], [480, 120], [535, 120], [570, 210], [490, 280],
+  [550, 330], [540, 285], [585, 235], [550, 400], [500, 400], [500, 500],
+  [545, 500], [560, 470], [580, 450], [610, 450], [640, 470],
+  [655, 500], [715, 500], [715, 400], [650, 400], [625, 240], [680, 320],
+  [720, 260], [670, 270], [620, 210], [720, 120], [635, 80], [660, 120],
+  [620, 170] 
 ];
 
 let levels = [points, points2, points3];
@@ -61,6 +61,7 @@ let selectedPoints = [];
 let elapsedTime = 0;
 let activated = true;
 let countdownStarted = false;
+let gameOver = false;
 
 function setup() { 
   createCanvas(1200, 1200);
@@ -75,20 +76,31 @@ function setup() {
 
 function draw() {
   background(255); // Clear canvas
+  fill('orange');
   textSize(40);
   if (level === 0) {
     text('Category: BARN', 400, 50);
     text('Level: ' + (level + 1), 1000, 500);
   } else if (level === 1) {
-    text('Category: COW', 400, 50);
+    text('Category: WINDMILL', 400, 50);
     text('Level: ' + (level + 1), 1000, 500);
   } else {
-    text('Category: WINDMILL', 400, 50);
+    text('Category: COW', 400, 50);
     text('Level: ' + (level + 1), 1000, 500);
   }
 
   textSize(25);
   drawPoints();
+
+  if (gameOver) {
+    textSize(90);
+    textFont('Silkscreen');
+    fill('red');
+    text('OOPS! Wrong Move!', 70, 300);
+    textSize(30); 
+    text('YOU LOST :( Try again!', 400, 350);
+    return; 
+  }
 
   strokeWeight(2);
   for (let i = 0; i < selectedPoints.length - 1; i++) {
@@ -102,11 +114,9 @@ function draw() {
     } else {
       stroke('red');
       selectedPoints.pop();
-      textSize(160);
-      textFont('Silkscreen');
-      text('YOU LOSE! :(', 0, 255);
-      stopStopwatch();
+      gameOver = true;
       activated = false;
+      break;
     }
 
     line(currentPoint[0], currentPoint[1], nextPoint[0], nextPoint[1]);
@@ -115,14 +125,14 @@ function draw() {
   if (selectedPoints.length === levels[level].length + 1) {
     textSize(163);
     textFont('Silkscreen');
-    text('YOU WIN! :)', 0, 255);
+    text('YOU WIN! :)', 35, 255);
     stopStopwatch();
     displayTimeTaken();
 
     if (level < levels.length - 1) {
       textSize(30);
-      fill('blue');
-      text(`Level ${level + 1} Complete! Next level in ${countdown} seconds`, 100, 100);
+      fill('pink');
+      text(`Level ${level + 1} Complete! Next level in ${countdown} seconds`, 200, 100);
 
       if (!countdownStarted) {
         countdownStarted = true;
@@ -169,6 +179,7 @@ function nextLevel() {
 
 function resetPoints() {
   selectedPoints = []; 
+  gameOver = false;
   resetStopwatch();
   activated = true;
 }
@@ -206,7 +217,8 @@ function formatTime(time) {
 function displayTimeTaken() {
   const timeTaken = formatTime(elapsedTime);
   textSize(24);
-  fill('blue');
+  fill('purple');
   textFont('Silkscreen');
   text('Time Taken: ' + timeTaken, 400, 300);
 }
+
