@@ -13,6 +13,7 @@ window.onclick = function(event) {
 }
 
 // For future functionality of changing text and href when users login
+/*
 function createSession() {
     document.addEventListener('DOMContentLoaded', () => {
         const loginLinks = document.querySelectorAll('a#loginProfile');
@@ -51,3 +52,4 @@ function isInSession() {
         });
     });
 }
+*/

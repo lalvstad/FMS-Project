@@ -8,17 +8,18 @@ let offsetX, offsetY;
 let puzzleCompleted = false;
 let timer = 0;
 let finalTime = 0;
+let gameStarted = false;
 
 function preload() {
-  img = loadImage("/images/BunnyPuzzle.png"); 
+  img = loadImage("./images/BunnyPuzzle.png"); 
 }
 
 // Track levels
 let currentLevel = 0;
 const levelConfigs = [
-  {imagePath: "/images/BunnyPuzzle.png", rows: 4, columns: 4},
-  {imagePath: "/images/UnicornPuzzle(2).png", rows: 5, columns: 5},
-  {imagePath: "/images/FarmPuzzle(3).png", rows: 6, columns: 6},
+  {imagePath: "./images/BunnyPuzzle.png", rows: 4, columns: 4},
+  {imagePath: "./images/UnicornPuzzle(2).png", rows: 5, columns: 5},
+  {imagePath: "./images/FarmPuzzle(3).png", rows: 6, columns: 6},
 ];
 
 // Reset game for next level
@@ -46,7 +47,6 @@ function setup() {
   let canvas = createCanvas(800, 800);
   canvas.parent("PuzzleActivity-container");
   loadLevel(currentLevel);
-
   textFont('Silkscreen');
   }
 
@@ -69,10 +69,10 @@ function createPuzzlePieces() {
       }
   }
 }
-  
+
 function draw() {
   background(220);
-  
+
   // Draw placed pieces first (these will appear at the back)
   let placedPieces = pieces.filter(piece => piece.isPlaced);
   for (let piece of placedPieces) {
@@ -86,7 +86,7 @@ function draw() {
   }
 
   // increment timer
-  if (!puzzleCompleted) {
+  if (gameStarted  && !puzzleCompleted) {
     timer += deltaTime / 1000; // increment in seconds
   }
 
@@ -95,19 +95,17 @@ function draw() {
     let message1 = "Congratulations!";
     let message2 = "You've completed the puzzle!";
     let message3 = "Time: " + timer.toFixed(2) + " seconds"; // Display time
-    // Saves score to local storage
-    setJigsawPuzzleHS(timer.toFixed(2));
 
     let textPadding = 20;
     let lineSpacing = 40;
     let maxTextWidth = max(textWidth(message1), textWidth(message2), textWidth(message3)) + textPadding;
     let textHeight = 140;
-    
+
 
     fill(255, 255, 255, 230);
     noStroke();
     rect(width / 2 - maxTextWidth / 2, height / 2 - textHeight / 2, maxTextWidth, textHeight, 10);
-  
+
     fill(0, 150, 0);
     textSize(32);
     textAlign(CENTER, CENTER);
@@ -133,7 +131,7 @@ function mousePressed() {
       if (mouseX > piece.x && mouseX < piece.x + pieceSize &&
           mouseY > piece.y && mouseY < piece.y + pieceSize &&
           !piece.isPlaced) {
-          
+
           pieces.splice(i, 1);
           pieces.push(piece);
 
