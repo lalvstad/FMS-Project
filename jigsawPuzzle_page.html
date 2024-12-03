@@ -19,6 +19,7 @@
         document.getElementById("bottomFlowerBanner").remove();
         document.getElementById("PuzzleActivity-container").style.display = "block";
         console.log("Game started");
+        gameStarted = true;
       }
     </script>
   </head>
@@ -26,7 +27,7 @@
   <body class="puzzleBG">
     <div class="topnav">
       <a href="main.html">Home</a>
-      <a href="login_page.html">Login</a>
+      <a href="login_page.html" id="loginProfile">Login</a>
       <div class="dropdown">
           <button class="dropbtn" onclick="getDropdown()">Activities</button>
           <div class="dropdown-content" id="myDropdown">
@@ -36,7 +37,7 @@
           </div>
       </div>
     </div>
-    <img class="topBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+    <img class="topBanner" src="./images/FlowerBanner.png" alt="FlowerBanner">
     <div class="puzzleTitle">
       <h1>Jigsaw Puzzle!</h1>
     </div>
@@ -58,7 +59,7 @@
         style="width: 100%; height: 500px;">
       </iframe>
     </div>
-    <img class="topBanner" id="bottomFlowerBanner" src="/images/FlowerBanner.png" alt="FlowerBanner">
+    <img class="topBanner" id="bottomFlowerBanner" src="./images/FlowerBanner.png" alt="FlowerBanner">
     <script src="jigsawPuzzle.js"></script>
   </body>
 </html>
